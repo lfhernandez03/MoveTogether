@@ -7,7 +7,6 @@ const Footer = () => {
                 <div className=' flex '>
                     <p> &copy; 2024 MoveTogether. All rights reserved.</p>
                 </div>
-                
             </footer>
         </div>
     );
