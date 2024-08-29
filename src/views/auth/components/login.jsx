@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button } from './button';
+import { Button } from '/src/views/components/button';
+
 const Login = () => {
     return (
-        <div className='grid justify-center gap-2 border p-4 m-4 rounded' >
+        <div className='grid justify-center gap-2 border rounded p-4 m-4 ' >
             <div className='pb-4'>
                 <h1 className='underline flex justify-center'>Login</h1>
             </div>

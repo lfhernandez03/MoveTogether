@@ -4,13 +4,13 @@ import { Button } from "./button";
 const Navbar = (props) => {
   return (
     <div className="container">
-      <nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6 w-screen h-32 border-b-2 border-b-green-950">
-        <div class="flex items-center flex-shrink-0 text-white mr-6 gap-6 px-9">
+      <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6 w-screen h-20 border-b-2 border-b-green-950">
+        <div className="flex items-center flex-shrink-0 text-white mr-6 gap-6 px-9">
           <img
             src="src\assets\images\movetogether.png"
             className="w-14 h-14"
           ></img>
-          <span class="font-semibold text-xl tracking-tight">MoveTogether</span>
+          <span className="font-semibold text-xl tracking-tight">MoveTogether</span>
           <h1>/</h1>
           <div className="flex flex-wrap">
             <Button
