@@ -5,7 +5,9 @@ import { MainLayout } from '../layouts/mainLayout'
 import { LoginPage } from '../pages/loginPage'
 
 createRoot(document.getElementById('root')).render(
-  <>
-    <LoginPage />
-  </>
+  <StrictMode>
+    <MainLayout 
+      
+    />
+  </StrictMode>,
 )
