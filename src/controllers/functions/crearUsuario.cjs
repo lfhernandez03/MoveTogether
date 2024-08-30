@@ -1,5 +1,5 @@
 // funciones/crearUsuario.js
-const Usuario = require("../../models/usuarios");
+const Usuario = require('../../models/usuarios.cjs');
 
 const crearUsuario = async (datosUsuario) => {
   try {

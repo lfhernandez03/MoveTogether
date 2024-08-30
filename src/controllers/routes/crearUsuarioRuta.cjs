@@ -1,8 +1,8 @@
 // rutas/usuarios.js
 const express = require("express");
 const router = express.Router();
-const crearUsuario = require("../controladores/crearUsuario");
-const usuarioValidator = require("../middlewares/validacionesCrear");
+const crearUsuario = require("../functions/crearUsuario.cjs");
+const usuarioValidator = require("../middlewares/validacionesCrear.cjs");
 const { validationResult } = require("express-validator");
 
 router.post("/usuarios/crear", usuarioValidator, async (req, res) => {

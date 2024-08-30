@@ -1,6 +1,6 @@
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
-const Login = require("../models/usuarios");
+const Login = require('../../models/usuarios.cjs');
 
 const loginController = async (req, res) => {
   // Verifica si hay errores de validación
