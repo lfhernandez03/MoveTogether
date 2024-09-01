@@ -1,35 +1,51 @@
 import React from "react";
 import { MainLayout } from "../layouts/mainLayout";
 import { Login } from "../auth/components/login";
-import { Span } from "../components/span";
+import { Span } from "../global/elements/logo";
+import { Button } from "../global/elements/button";
 
 const LoginPage = () => {
   return (
-    <div className="h-full ">
-      <MainLayout>
-        <div className="grid grid-cols-5 grid-rows-4 gap-4 h-full mx-24">
-          <div className="col-span-3  flex justify-start items-center">
-            <Span width="100px" height="100px" fontSize="32px" marginTop="25px" />
-          </div>
-          <div className="col-span-3 row-span-2 col-start-1 row-start-2 flex justify-start items-start text-justify">
-            <span className="text-7xl font-semibold ">
-                <p className="">
-                    Connect with the <br/>  most (in)credible <br/> professionals!
-                </p>
-            </span>
-          </div>
-          <div className="col-span-3 row-start-4 flex justify-start items-start">  
-            <span className="text-3xl font-semibold">
-                Aquí va el footer
-            </span>
-          </div>
-          <div className="col-span-2 row-span-4 col-start-4 row-start-1 grid ">
-            <Login />
+    <div className="grid grid-cols-3 grid-rows-4 gap-4">
+      <div className="row-span-4">
+        <div className=" flex justify-start px-8 py-4">
+          <Span
+            width="64px"
+            height="64px"
+            className="flex text-2xl font-semibold"
+          />
+        </div>
+        <div className="grid justify-center">
+          <img
+            src="src\assets\images\sprinting.gif"
+            alt="Running"
+            className="remove-bg w-64 flex justify-center items-center"
+          />
+        </div>
+      </div>
+      <div className="row-span-4 pt-24">
+        <Login />
+      </div>
+      <div className="row-span-4">
+        <div className=" flex justify-end px-8 py-4 items-start">
+          <div className="flex items-center gap-4">
+            <div>
+              <Button text="Registrate" className="" />
+            </div>
+            <span className="border-l border-gray-400 h-8"></span>
+            <div>
+              <Button text="Nosotros" className="" />
+            </div>
           </div>
         </div>
-      </MainLayout>
+        <div>
+          <img src="src\assets\images\biking.png" alt="biking"
+            className="remove-bg w-64 "
+          />
+        </div>
+      </div>
     </div>
-  ); 
+  );
 };
 
 export { LoginPage };

@@ -7,12 +7,10 @@ html, body, #root {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    
 }
 
-main {
-    height: 1vh;
-    overflow: hidden;
+.remove-bg{
+    filter: brightness(1,1);
+    mix-blend-mode: multiply;
 }
-
-
