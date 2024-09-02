@@ -3,13 +3,12 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const useLogin = () => {
-
-  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleUsernameChange = (e) => {
-    setUserName(e.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
@@ -19,19 +18,21 @@ const useLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("api/login", {
+      const payload = { email, password };
+      console.log("Enviando JSON:", JSON.stringify(payload));
+      const response = await fetch("http://localhost:3000/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userName, password }),
+        body: JSON.stringify({ email, password }),
       });
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
 
       const data = await response.json();
-      if (data.success) {
+      if (data.success || response.ok) {
         setError("");
         toast.success("Bienvenido");
       } else {
@@ -47,10 +48,10 @@ const useLogin = () => {
   };
 
   return {
-    userName,
+    email,
     password,
     error,
-    handleUsernameChange,
+    handleEmailChange,
     handlePasswordChange,
     handleLogin,
   };

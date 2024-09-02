@@ -5,10 +5,10 @@ import useLogin from "../hooks/loginAuth";
 
 const Login = () => {
   const {
-    userName,
+    email,
     password,
     error,
-    handleUsernameChange,
+    handleEmailChange,
     handlePasswordChange,
     handleLogin,
   } = useLogin();
@@ -29,8 +29,8 @@ const Login = () => {
                 <Input
                   type="text"
                   placeholder="Usuario/Correo"
-                  value={userName}
-                  onChange={handleUsernameChange}
+                  value={email}
+                  onChange={handleEmailChange}
                   className="rounded font-semibold py-0.5 pl-6 pr-10 my-1 bg-slate-100 border-gray-500 border w-full"
                 />
                 <i className="fa-solid fa-user absolute right-7 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
