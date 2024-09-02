@@ -17,30 +17,39 @@ const LoginPage = () => {
         </div>
         <div className="grid justify-center">
           <img
-            src="src\assets\images\sprinting.gif"
+            src="src\assets\images\ilustracion1.svg"
             alt="Running"
-            className="remove-bg w-64 flex justify-center items-center"
+            className="remove-bg w-full  "
           />
         </div>
       </div>
       <div className="row-span-4 pt-24">
-        <Login />
+          <Login />
+
       </div>
       <div className="row-span-4">
         <div className=" flex justify-end px-8 py-4 items-start">
           <div className="flex items-center gap-4">
             <div>
-              <Button text="Registrate" className="" />
+              <Button
+                text="Registrate"
+                className="border rounded-md border-green-400"
+              />
             </div>
             <span className="border-l border-gray-400 h-8"></span>
             <div>
-              <Button text="Nosotros" className="" />
+              <Button
+                text="Nosotros"
+                className="border rounded-md border-green-400"
+              />
             </div>
           </div>
         </div>
         <div>
-          <img src="src\assets\images\biking.png" alt="biking"
-            className="remove-bg w-64 "
+          <img
+            src="src\assets\images\ilustracion2.svg"
+            alt="biking"
+            className="remove-bg w-full "
           />
         </div>
       </div>
