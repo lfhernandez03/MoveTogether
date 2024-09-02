@@ -1,10 +1,12 @@
 import React from 'react';
 import '/src/index.css';
+import { ToastContainer } from 'react-toastify';
 
 const MainLayout = ({ children }) => {
     return (
         <>
-           <main className='h-full'>{children}</main>
+           <main className=''>{children}</main>
+           
         </>
     );
 };
