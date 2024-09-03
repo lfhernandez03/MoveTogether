@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3000;
 // Importar rutas
 const crearUsuario = require("./src/controllers/routes/crearUsuarioRuta.cjs");
 const login = require("./src/controllers/routes/loginRuta.cjs");
+const cambiarContrasenia = require("./src/controllers/routes/cambiarContraseniaRuta.cjs");
 
 // Conexión a la base de datos
 connectDB();
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 // Rutas
 app.use("/api", crearUsuario);
 app.use("/api", login);
+app.use("/api", cambiarContrasenia);
 
 // Servidor
 app.listen(PORT, () => {

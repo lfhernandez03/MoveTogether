@@ -38,8 +38,8 @@ const UsuarioSchema = new mongoose.Schema(
       type: String,
       default: "default-avatar.png",
     },
-    deporte: {
-      type: String,
+    deportes: {
+      type: [String],
       required: [true, "El deporte es obligatorio"],
     },
     amigos: [
@@ -78,20 +78,7 @@ const UsuarioSchema = new mongoose.Schema(
   }
 );
 
-// Middleware para hashear la contraseña antes de guardar el usuario
-UsuarioSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    return next();
-  }
 
-  try {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
 
 // Creamos el modelo basado en el esquema
 const Usuario = mongoose.model("Usuario", UsuarioSchema);

@@ -1,5 +1,4 @@
 const { validationResult } = require("express-validator");
-const bcrypt = require("bcryptjs");
 const Login = require('../../models/usuarios.cjs');
 
 const loginController = async (req, res) => {
@@ -10,35 +9,30 @@ const loginController = async (req, res) => {
   }
 
   const { email, password } = req.body;
+
+  // Verifica si email o password no están presentes en la solicitud
   if (!email || !password) {
-    return res.status(400).json({ message: "Email and password are required" });
+    return res.status(400).json({ message: "Email y contraseña son requeridos" });
   }
 
   try {
-    console.log("Buscando usuario:", email);
-
-    // Busca al usuario en la base de datos por su email
+    // Verifica si el usuario existe
     const usuario = await Login.findOne({ email });
-
-    // Si el usuario no se encuentra, responde con un error
     if (!usuario) {
-      return res.status(400).json({ message: "Usuario no encontrado" });
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
 
     // Verifica la contraseña
-    console.log("Contraseña ingresada:", password);
-    console.log("Contraseña almacenada (hash):", usuario.password);
-
-    const isMatch = await bcrypt.compare(password, usuario.password);
-    if (!isMatch) {
+    if (password !== usuario.password) {
+      console.log("Contraseña almacenada en la BD:", usuario.password); // Imprime la contraseña almacenada
       return res.status(400).json({ message: "Contraseña incorrecta" });
     }
 
-    // Si todo está bien, responde con éxito
-    res.status(200).json({ message: "Login exitoso" });
+    // Iniciar sesión exitosamente
+    res.status(200).json({ message: "Inicio de sesión exitoso" });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error del servidor" });
+    console.error("Error al iniciar sesión:", error);
+    res.status(500).json({ message: "Ocurrió un error al iniciar sesión" });
   }
 };
 

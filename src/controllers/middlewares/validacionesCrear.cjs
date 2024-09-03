@@ -64,11 +64,13 @@ const usuarioValidator = [
     .isIn(["Masculino", "Femenino"])
     .withMessage("Género inválido"),
 
-  body("deporte")
+    body("deportes")
     .notEmpty()
-    .withMessage("El deporte es obligatorio")
-    .isString()
-    .withMessage("El deporte debe ser una cadena de texto"),
+    .withMessage("Los deportes son obligatorios")
+    .isArray()
+    .withMessage("Los deportes deben ser un arreglo")
+    .custom((array) => array.every(item => typeof item === 'string'))
+    .withMessage("Cada deporte debe ser una cadena de texto"),
 
   body("ubicacion.pais")
     .optional()
