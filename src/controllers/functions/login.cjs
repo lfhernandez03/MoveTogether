@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const Login = require('../../models/usuarios.cjs');
+const jwt = require("jsonwebtoken");
 
 const loginController = async (req, res) => {
   // Verifica si hay errores de validación
@@ -30,6 +31,21 @@ const loginController = async (req, res) => {
 
     // Iniciar sesión exitosamente
     res.status(200).json({ message: "Inicio de sesión exitoso" });
+    // Si todo está bien, genera el token JWT
+    const payload = {
+      nombre: usuario.nombre, // Nombre del usuario
+      telefono: usuario.telefono, // Teléfono del usuario
+      avatar: usuario.avatar, // Avatar del usuario
+      deporte: usuario.deporte, // Deporte favorito del usuario
+    };
+
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES_IN,
+    });
+    console.log("Token generado:", token);
+
+    // Si todo está bien, responde con éxito
+    res.status(200).json({ message: "Login exitoso" });
   } catch (error) {
     console.error("Error al iniciar sesión:", error);
     res.status(500).json({ message: "Ocurrió un error al iniciar sesión" });
