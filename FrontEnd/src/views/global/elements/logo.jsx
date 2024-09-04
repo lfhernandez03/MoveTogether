@@ -5,7 +5,7 @@ export const Span = (props) => {
     <div className='flex gap-4'>
         <span className='flex-shrink-0'>
             <img
-                src="src\assets\images\movetogether.png"
+                src="/images/movetogether.png"
                 style={{ width: props.width, height: props.height }}
             />
         </span>

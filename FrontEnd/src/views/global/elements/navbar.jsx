@@ -13,7 +13,11 @@ const Navbar = (props) => {
       <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6 w-screen h-20 border-b-2 border-b-green-950">
         <div className="flex items-center flex-shrink-0 text-white mr-6 gap-6 px-9">
           <img
+<<<<<<< Updated upstream:FrontEnd/src/views/global/elements/navbar.jsx
             src="src\assets\images\movetogether.png"
+=======
+            src="/images/movetogether.png"
+>>>>>>> Stashed changes:src/views/global/elements/navbar.jsx
             className="w-14 h-14"
           ></img>
           <span className="font-semibold text-xl tracking-tight">MoveTogether</span>
