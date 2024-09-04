@@ -1,21 +1,25 @@
 {
-    "projects": [
+    "builds": [
       {
-        "name": "movetogether-front",
-        "root": "FrontEnd",
-        "buildCommand": "npm run build",
-        "outputDirectory": "dist"
+        "src": "frontend/package.json",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "frontend/dist"
+        }
       },
       {
-        "name": "movetogether-back",
-        "root": "BackEnd",
-        "buildCommand": "",
-        "outputDirectory": ""
+        "src": "backend/index_back.cjs",
+        "use": "@vercel/node"
       }
     ],
-    "functions": {
-    "api/index.js": {
-      "runtime": "nodejs14.x"
-    }
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "/backend/index_back.cjs"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/frontend/dist/$1"
+      }
+    ]
   }
-}
