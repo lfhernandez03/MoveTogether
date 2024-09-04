@@ -25,7 +25,6 @@ const LoginPage = () => {
       </div>
       <div className="row-span-4 pt-24">
           <Login />
-
       </div>
       <div className="row-span-4">
         <div className=" flex justify-end px-8 py-4 items-start">

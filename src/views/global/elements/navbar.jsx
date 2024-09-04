@@ -10,43 +10,23 @@ const Navbar = (props) => {
 
   return (
     <div className="container">
-      <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6 w-screen h-20 border-b-2 border-b-green-950">
-        <div className="flex items-center flex-shrink-0 text-white mr-6 gap-6 px-9">
+      <nav className="flex items-center justify-between flex-wrap bg-green-600 p-6 w-screen h-24 border-b-2 border-b-blue-500 pb-2">
+        <div className="flex items-center flex-shrink-0 text-white gap-6 px-6">
           <img
             src="src\assets\images\movetogether.png"
             className="w-14 h-14"
           ></img>
           <span className="font-semibold text-xl tracking-tight">MoveTogether</span>
-          <h1>/</h1>
+          <h1 className="text-4xl">/</h1>
         </div>
         <div>
-          <Button onClick={toggleMenu} text="=" className="rounded-full px-2 py-1 bg-red-500 block lg:hidden" />
+          <Button onClick={toggleMenu} text="=" className="rounded-full px-2 py-1 bg-white lg:hidden border-white-500 shadow-custom mr-5" />
         </div>
-        <div className={`lg:flex lg:flex-wrap lg:flex-1 w-full ${isMenuHidden ? 'hidden' : ''} flex justify-center`}>
-          <Button
-            text="Sport"
-            className="rounded-full px-2 py-1 hover:bg-white hover:border-gray-300 hover:border-2 mr-6 text-black"
-          />
-          <Button
-            text="Nutrition"
-            className="rounded-full px-2 py-1 hover:bg-white hover:border-gray-300 hover:border-2 mr-6 text-black"
-          />
-          <Button
-            text="Sport"
-            className="rounded-full px-2 py-1 hover:bg-white hover:border-gray-300 hover:border-2 mr-6 text-black"
-          />
-          <Button
-            text="Nutrition"
-            className="rounded-full px-2 py-1 hover:bg-white hover:border-gray-300 hover:border-2 mr-6 text-black"
-          />
-          <div className="lg:flex lg:gap-4 lg:px-16 lg:flex-wrap lg:flex-1 lg:justify-end flex gap-4">
+        <div className={`lg:flex lg:flex-wrap lg:flex-1 lg:px-16 w-full ${isMenuHidden ? 'hidden' : ''} flex justify-center`}>
+          <div className="lg:flex-1 lg:justify-end flex gap-4 lg:relative absolute top-6 lg:top-0">
             <Button
-              text="Sing in"
+              text="Login"
               className="bg-white rounded-full px-2 py-1 border-gray-200 border-2"
-            />
-            <Button
-              text="Log in"
-              className="rounded-full px-2 py-1 border-gray-200 border-2"
             />
           </div>
         </div>
