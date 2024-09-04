@@ -7,10 +7,9 @@ html, body, #root {
     height: 100%;
     margin: 0;
     padding: 0;
-    
 }
 
-.remove-bg{
+.remove-bg {
     filter: brightness(1,1);
     mix-blend-mode: multiply;
 }
