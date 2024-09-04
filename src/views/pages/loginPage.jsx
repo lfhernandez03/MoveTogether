@@ -17,7 +17,7 @@ const LoginPage = () => {
         </div>
         <div className="grid justify-center">
           <img
-            src="src\assets\images\ilustracion1.svg"
+            src="/images/ilustracion1.svg"
             alt="Running"
             className="remove-bg w-full  "
           />
@@ -47,7 +47,7 @@ const LoginPage = () => {
         </div>
         <div>
           <img
-            src="src\assets\images\ilustracion2.svg"
+            src="/images/ilustracion2.svg"
             alt="biking"
             className="remove-bg w-full "
           />
