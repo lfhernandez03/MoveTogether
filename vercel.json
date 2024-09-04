@@ -9,8 +9,13 @@
       {
         "name": "movetogether-back",
         "root": "BackEnd",
-        "buildCommand": "npm run build",
-        "outputDirectory": "dist"
+        "buildCommand": "",
+        "outputDirectory": ""
       }
-    ]
+    ],
+    "functions": {
+    "api/index.js": {
+      "runtime": "nodejs14.x"
+    }
+  }
 }
