@@ -9,7 +9,7 @@ const { join } = require("path"); // Importar función join de path
 const cors = require("cors"); // Importar cors
 
 const app = express();
-const PORT = process.env.PORT || 3000 ;
+const PORT = process.env.PORT || 3001 ;
 
 // Importar rutas
 const crearUsuario = require("./src/controllers/routes/crearUsuarioRuta.cjs");
