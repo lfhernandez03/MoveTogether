@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import '/src/index.css'
+import '../../../index.css'
 import { MainLayout } from '../../layouts/mainLayout'
 import { Login } from '../../auth/components/login'
 import { LoginPage } from '../../pages/loginPage'
