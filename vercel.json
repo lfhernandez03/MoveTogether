@@ -1,0 +1,16 @@
+{
+    "projects": [
+      {
+        "name": "movetogether-front",
+        "root": "FrontEnd",
+        "buildCommand": "npm run build",
+        "outputDirectory": "dist"
+      },
+      {
+        "name": "movetogether-back",
+        "root": "BackEnd",
+        "buildCommand": "npm run build",
+        "outputDirectory": "dist"
+      }
+    ]
+}

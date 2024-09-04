@@ -26,7 +26,6 @@ app.use(cors({
 }));
 
 // Configuración
-app.use(express.static(join(__dirname, "public"))); // Ajuste para usar la función `static`
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
