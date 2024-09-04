@@ -1,4 +1,7 @@
-require("dotenv").config(); // Cargar variables de entorno
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '.env') }); // Cargar variables de entorno
+
+
 const express = require("express"); // Importar Express
 const mongoose = require("mongoose"); // Importar Mongoose
 const connectDB = require("./config/db.config.cjs"); // Importar función de conexión a la BD
