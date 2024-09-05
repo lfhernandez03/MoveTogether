@@ -49,7 +49,7 @@ const Login = () => {
                 <Button
                   text="Inicia Sesion"
                   className="text-white rounded-md w-full"
-                  style={{ backgroundColor: "##0081DA" }}
+                  style={{ backgroundColor: "#0081DA" }}
                 />
               </div>
             </div>

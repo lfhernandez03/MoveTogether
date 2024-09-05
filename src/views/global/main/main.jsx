@@ -13,7 +13,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <>
       <MainLayout>
-        <RegisterPage />
+        <LoginPage />
         <ToastContainer />
       </MainLayout>
     </>
