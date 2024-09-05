@@ -33,26 +33,31 @@ const useLogin = () => {
       //Manejar los posibles errores al iniciar sesion
       if (!response.ok) {
         const errorData = await response.json();
+        let errorMessage;
+
         if (
           response.status === 400 &&
           errorData.errors &&
-          errorData.errors.length > 0
+          errorData.errors.length > 0 //Error de validacion de datos: Correo invalido o contraseña invalida
         ) {
-          const errorMessage = errorData.errors[0].msg;
-          setError(errorMessage);
-          toast.error(errorMessage);
+          errorMessage = errorData.errors[0].msg;
+        } else if (response.status === 400) {  //Error de validacion de datos
+          errorMessage = errorData.message;
+        } else if (response.status === 404) { //Error de usuario no encontrado
+          errorMessage = errorData.message;
+        } else if (response.status === 500) { //Error de servidor
+          errorMessage = "Error en la solicitud de inicio de sesión";
         } else {
-          throw new Error("Error en la solicitud de inicio de sesión");
+          errorMessage = "Ocurrió un error inesperado";
         }
+        setError(errorMessage);
+        toast.error(errorMessage);
       } else {
         const data = await response.json();
         if (data.success || response.ok) {
           setError("");
           toast.success("Bienvenido");
-        } else {
-          setError("Usuario o contraseña incorrectos");
-          toast.error("Usuario o contraseña incorrectos");
-        }
+        } 
       }
     } catch (error) {
       setError("Error en la solicitud de inicio de sesión");

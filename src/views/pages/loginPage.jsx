@@ -3,18 +3,15 @@ import { MainLayout } from "../layouts/mainLayout";
 import { Login } from "../auth/components/login";
 import { Span } from "../global/elements/logo";
 import { Button } from "../global/elements/button";
+import { NavLogin } from "../global/elements/nav";
 
 const LoginPage = () => {
   return (
-    <div className="grid grid-cols-3 grid-rows-4 gap-4">
-      <div className="row-span-4">
-        <div className=" flex justify-start px-8 py-4">
-          <Span
-            width="64px"
-            height="64px"
-            className="flex text-2xl font-semibold"
-          />
-        </div>
+    <div className=" md:grid-cols-3 md:grid-rows-6 gap-4">
+      <div className="col-span-3">
+        <NavLogin />
+      </div>
+      <div className="hidden row-span-5">
         <div className="grid justify-center">
           <img
             src="/images/ilustracion1.svg"
@@ -23,28 +20,10 @@ const LoginPage = () => {
           />
         </div>
       </div>
-      <div className="row-span-4 pt-24">
-          <Login />
-
+      <div className=" flex items-center justify-center pt-20 ">
+        <Login />
       </div>
-      <div className="row-span-4">
-        <div className=" flex justify-end px-8 py-4 items-start">
-          <div className="flex items-center gap-4">
-            <div>
-              <Button
-                text="Registrate"
-                className="border rounded-md border-green-400"
-              />
-            </div>
-            <span className="border-l border-gray-400 h-8"></span>
-            <div>
-              <Button
-                text="Nosotros"
-                className="border rounded-md border-green-400"
-              />
-            </div>
-          </div>
-        </div>
+      <div className="hidden row-span-5">
         <div>
           <img
             src="/images/ilustracion2.svg"

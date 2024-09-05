@@ -8,7 +8,7 @@ export const Button = (props) => {
       className={`font-semibold py-2 px-6 my-3 flex items-center justify-center ${props.className}`}
       style={props.style}
     >
-      {props.icon && <i className={`${props.icon} mr-2`}></i>}
+      {props.icon && <i className={`${props.icon} `}></i>}
       {props.text}
     </button>
   );

@@ -14,9 +14,9 @@ const Login = () => {
   } = useLogin();
 
   return (
-    <div className="flex justify-center w-96 mx-auto border rounded-3xl border-green-400 p-10 shadow-custom">
+    <div className="border rounded-3xl border-green-400 p-5 shadow-custom">
       <div className="">
-        <div className="grid justify-center mb-7">
+        <div className="grid justify-center mb-4">
           <h1 className="text-3xl font-bold text-center mb-5">Login</h1>
           <p className="text-center font-semibold ">
             Hola, bienvenido a MoveTogether
@@ -31,7 +31,7 @@ const Login = () => {
                   placeholder="Usuario/Correo"
                   value={email}
                   onChange={handleEmailChange}
-                  className="rounded font-semibold py-0.5 pl-6 pr-10 my-1 bg-slate-100 border-gray-500 border w-full"
+                  className="rounded font-semibold my-1 bg-slate-100 border-gray-500 border"
                 />
                 <i className="fa-solid fa-user absolute right-7 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
               </div>
@@ -45,15 +45,11 @@ const Login = () => {
                 />
                 <i className="fa-solid fa-lock absolute right-7 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
               </div>
-              <div className="flex justify-center w-full">
+              <div className="flex justify-center ">
                 <Button
                   text="Inicia Sesion"
-                  style={{
-                    backgroundColor: "#0081DA",
-                    color: "#ecf0f1",
-                    borderRadius: "5px",
-                    width: "250px",
-                  }}
+                  className="text-white rounded-md w-full"
+                  style={{ backgroundColor: "##0081DA" }}
                 />
               </div>
             </div>
@@ -70,7 +66,7 @@ const Login = () => {
           <div className="flex justify-center relative pb-4">
             <Button
               text="Google"
-              className=" rounded-md border-gray-400 border "
+              className=" rounded-md border-gray-400 border px-8 gap-2"
               icon="fa-brands fa-google"
             />
           </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "./button";
+import { Span } from "./logo";
 
 const Navbar = (props) => {
   const [isMenuHidden, setIsMenuHidden] = useState(false);
@@ -9,45 +10,41 @@ const Navbar = (props) => {
   };
 
   return (
-    <div className="container">
-      <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6 w-screen h-20 border-b-2 border-b-green-950">
-        <div className="flex items-center flex-shrink-0 text-white mr-6 gap-6 px-9">
-          <img
-            src="/images/movetogether.png"
-            className="w-14 h-14"
-          ></img>
-          <span className="font-semibold text-xl tracking-tight">MoveTogether</span>
-          <h1>/</h1>
+    <div className="container flex items-center justify-center">
+      <nav className="flex items-center flex-wrap p-4 w-full px-8">
+        <div className="flex items-center flex-shrink-0 ">
+          <Span
+            width="64px"
+            height="64px"
+            className="flex text-2xl font-semibold"
+          />
         </div>
-        <div>
-          <Button onClick={toggleMenu} text="=" className="rounded-full px-2 py-1 bg-red-500 block lg:hidden" />
+        <div className="block lg:hidden">
+          <Button
+            onClick={toggleMenu}
+            text="="
+            className="rounded-full px-2 py-1 bg-red-500 block lg:hidden"
+          />
         </div>
-        <div className={`lg:flex lg:flex-wrap lg:flex-1 w-full ${isMenuHidden ? 'hidden' : ''} flex justify-center`}>
-          <Button
-            text="Sport"
-            className="rounded-full px-2 py-1 hover:bg-white hover:border-gray-300 hover:border-2 mr-6 text-black"
-          />
-          <Button
-            text="Nutrition"
-            className="rounded-full px-2 py-1 hover:bg-white hover:border-gray-300 hover:border-2 mr-6 text-black"
-          />
-          <Button
-            text="Sport"
-            className="rounded-full px-2 py-1 hover:bg-white hover:border-gray-300 hover:border-2 mr-6 text-black"
-          />
-          <Button
-            text="Nutrition"
-            className="rounded-full px-2 py-1 hover:bg-white hover:border-gray-300 hover:border-2 mr-6 text-black"
-          />
-          <div className="lg:flex lg:gap-4 lg:px-16 lg:flex-wrap lg:flex-1 lg:justify-end flex gap-4">
-            <Button
-              text="Sing in"
-              className="bg-white rounded-full px-2 py-1 border-gray-200 border-2"
-            />
-            <Button
-              text="Log in"
-              className="rounded-full px-2 py-1 border-gray-200 border-2"
-            />
+        <div
+          className={`lg:flex lg:flex-wrap lg:flex-1 w-full ${
+            isMenuHidden ? "hidden" : ""
+          } flex justify-end`}
+        >
+          <div className="flex items-center gap-4">
+            <div>
+              <Button
+                text="Registrate"
+                className="border rounded-md border-green-400"
+              />
+            </div>
+            <span className="border-l border-gray-400 h-8"></span>
+            <div>
+              <Button
+                text="Nosotros"
+                className="border rounded-md border-green-400"
+              />
+            </div>
           </div>
         </div>
       </nav>
