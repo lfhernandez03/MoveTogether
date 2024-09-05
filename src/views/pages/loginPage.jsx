@@ -9,7 +9,7 @@ const LoginPage = () => {
   return (
     <div className=" md:grid-cols-3 md:grid-rows-6 gap-4">
       <div className="col-span-3">
-        <NavLogin />
+        <NavLogin isLoginPage={true}/>
       </div>
       <div className="hidden row-span-5">
         <div className="grid justify-center">

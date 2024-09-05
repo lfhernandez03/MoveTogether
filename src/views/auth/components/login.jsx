@@ -17,7 +17,7 @@ const Login = () => {
     <div className="border rounded-3xl border-green-400 p-5 shadow-custom">
       <div className="">
         <div className="grid justify-center mb-4">
-          <h1 className="text-3xl font-bold text-center mb-5">Login</h1>
+          <h1 className="text-3xl font-bold text-center mb-5">Inicia Sesión</h1>
           <p className="text-center font-semibold ">
             Hola, bienvenido a MoveTogether
           </p>
@@ -47,7 +47,7 @@ const Login = () => {
               </div>
               <div className="flex justify-center ">
                 <Button
-                  text="Inicia Sesion"
+                  text="Inicia Sesión"
                   className="text-white rounded-md w-full"
                   style={{ backgroundColor: "#0081DA" }}
                 />
@@ -83,7 +83,7 @@ const Login = () => {
           <p className="text-center font-semibold ">
             ¿No tienes cuenta?{" "}
             <a href="/signup" className="text-blue-500">
-              Registrate
+              Regístrate
             </a>
           </p>
         </div>

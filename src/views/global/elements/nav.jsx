@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Span } from "./logo";
 import { Button } from "./button";
 
-const NavLogin = () => {
+const NavLogin = ( isLoginPage) => {
   const [isMenuHidden, setIsMenuHidden] = useState(true);
   const menuRef = useRef(null);
 
@@ -41,7 +41,7 @@ const NavLogin = () => {
                 href="#"
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
-                Inicia Sesion
+                {isLoginPage ? "Regístrate" : "Iniciar Sesión"}
               </a>
               <a
                 href="#"
