@@ -10,41 +10,25 @@ const Navbar = (props) => {
   };
 
   return (
-    <div className="container flex items-center justify-center">
-      <nav className="flex items-center flex-wrap p-4 w-full px-8">
-        <div className="flex items-center flex-shrink-0 ">
-          <Span
-            width="64px"
-            height="64px"
-            className="flex text-2xl font-semibold"
-          />
+    <div className="container">
+      <nav className="flex items-center justify-between flex-wrap bg-green-600 p-6 w-screen h-24 border-b-2 border-b-blue-500 pb-2">
+        <div className="flex items-center flex-shrink-0 text-white gap-6 px-6">
+          <img
+            src="/images/ilustracion2.svg"
+            className="w-14 h-14"
+          ></img>
+          <span className="font-semibold text-xl tracking-tight">MoveTogether</span>
+          <h1 className="text-4xl">/</h1>
         </div>
-        <div className="block lg:hidden">
-          <Button
-            onClick={toggleMenu}
-            text="="
-            className="rounded-full px-2 py-1 bg-red-500 block lg:hidden"
-          />
+        <div>
+          <Button onClick={toggleMenu} text="=" className="rounded-full px-2 py-1 bg-white lg:hidden border-white-500 shadow-custom mr-5" />
         </div>
-        <div
-          className={`lg:flex lg:flex-wrap lg:flex-1 w-full ${
-            isMenuHidden ? "hidden" : ""
-          } flex justify-end`}
-        >
-          <div className="flex items-center gap-4">
-            <div>
-              <Button
-                text="Registrate"
-                className="border rounded-md border-green-400"
-              />
-            </div>
-            <span className="border-l border-gray-400 h-8"></span>
-            <div>
-              <Button
-                text="Nosotros"
-                className="border rounded-md border-green-400"
-              />
-            </div>
+        <div className={`lg:flex lg:flex-wrap lg:flex-1 lg:px-16 w-full ${isMenuHidden ? 'hidden' : ''} flex justify-center`}>
+          <div className="lg:flex-1 lg:justify-end flex gap-4 lg:relative absolute top-6 lg:top-0">
+            <Button
+              text="Login"
+              className="bg-white rounded-full px-2 py-1 border-gray-200 border-2"
+            />
           </div>
         </div>
       </nav>
