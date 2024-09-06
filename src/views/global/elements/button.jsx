@@ -1,9 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Button = (props) => {
+  const navigate = useNavigate();
+
+  const handleClick = (event) => {
+    if (props.onClick) {
+      props.onClick(event);
+    }
+    if (props.navigateTo) {
+      navigate(props.navigateTo);
+    }
+  };
   return (
     <button
-      onClick={props.onClick}
+      onClick={handleClick}
       value={props.value}
       className={`font-semibold py-2 px-6 my-3 flex items-center justify-center ${props.className}`}
       style={props.style}

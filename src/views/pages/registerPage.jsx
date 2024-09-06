@@ -1,5 +1,4 @@
-import { Login } from "../auth/components/login";
-import { Register } from "../auth/components/register";
+import Register from "../auth/components/register";
 import { Navbar } from "../global/elements/navbar";
 
 const RegisterPage = () => {
@@ -26,4 +25,4 @@ const RegisterPage = () => {
   );
 };
 
-export { RegisterPage };
+export default RegisterPage;

@@ -38,7 +38,7 @@ const NavLogin = ( isLoginPage) => {
           {!isMenuHidden && (
             <div className="absolute right-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
               <a
-                href="#"
+                href={isLoginPage ? "/register" : "/login"}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
               >
                 {isLoginPage ? "Regístrate" : "Iniciar Sesión"}
@@ -58,6 +58,7 @@ const NavLogin = ( isLoginPage) => {
               <div>
                 <Button
                   text="Registrate"
+                  navigateTo="/register"
                   className="border rounded-md border-green-400"
                 />
               </div>
