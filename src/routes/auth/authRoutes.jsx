@@ -1,7 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { LoginPage } from "../../views/pages/loginPage";
-import { RegisterPage } from "../../views/pages/registerPage";
+import LoginPage from "../../views/pages/loginPage";
+import RegisterPage from "../../views/pages/registerPage";
+import HolaMundo from "../../views/pages/holaMundo";
 
 const AuthRoutes = () => {
   return (

@@ -1,8 +1,5 @@
 import React from "react";
-import { MainLayout } from "../layouts/mainLayout";
 import { Login } from "../auth/components/login";
-import { Span } from "../global/elements/logo";
-import { Button } from "../global/elements/button";
 import { NavLogin } from "../global/elements/nav";
 
 const LoginPage = () => {
@@ -32,4 +29,4 @@ const LoginPage = () => {
   );
 };
 
-export { LoginPage };
+export default LoginPage;

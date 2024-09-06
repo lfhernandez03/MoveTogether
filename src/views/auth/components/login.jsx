@@ -34,6 +34,7 @@ const Login = () => {
                     placeholder="Usuario/Correo"
                     value={email}
                     onChange={handleEmailChange}
+                    required
                     className="rounded font-semibold my-1 bg-slate-100 border-gray-500 border"
                   />
                   <i className="fa-solid fa-user absolute right-7 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
@@ -44,6 +45,7 @@ const Login = () => {
                     placeholder="Contraseña"
                     value={password}
                     onChange={handlePasswordChange}
+                    required
                     className="rounded font-semibold py-0.5 px-6 my-1 bg-slate-100 border-gray-500 border"
                   />
                   <i className="fa-solid fa-lock absolute right-7 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
