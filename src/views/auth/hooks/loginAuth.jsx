@@ -41,11 +41,14 @@ const useLogin = () => {
           errorData.errors.length > 0 //Error de validacion de datos: Correo invalido o contraseña invalida
         ) {
           errorMessage = errorData.errors[0].msg;
-        } else if (response.status === 400) {  //Error de validacion de datos
+        } else if (response.status === 400) {
+          //Error de validacion de datos
           errorMessage = errorData.message;
-        } else if (response.status === 404) { //Error de usuario no encontrado
+        } else if (response.status === 404) {
+          //Error de usuario no encontrado
           errorMessage = errorData.message;
-        } else if (response.status === 500) { //Error de servidor
+        } else if (response.status === 500) {
+          //Error de servidor
           errorMessage = "Error en la solicitud de inicio de sesión";
         } else {
           errorMessage = "Ocurrió un error inesperado";
@@ -57,7 +60,7 @@ const useLogin = () => {
         if (data.success || response.ok) {
           setError("");
           toast.success("Bienvenido");
-        } 
+        }
       }
     } catch (error) {
       setError("Error en la solicitud de inicio de sesión");
