@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../../global/elements/button";
 import { Input } from "../../global/elements/inputs";
 import useLogin from "../hooks/loginAuth";
+import ChangePass from "../components/changePass";
 
 const Login = () => {
   const {
     email,
     password,
-    error,
     handleEmailChange,
     handlePasswordChange,
     handleLogin,
   } = useLogin();
+
+  const [showChangePass, setShowChangePass] = useState(false);
+
+  const handleForgotPasswordClick = () => {
+    setShowChangePass(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowChangePass(false);
+  };
 
   return (
     <div>
@@ -35,7 +45,7 @@ const Login = () => {
                     value={email}
                     onChange={handleEmailChange}
                     required
-                    className="rounded font-semibold my-1 bg-slate-100 border-gray-500 border"
+                    className=""
                   />
                   <i className="fa-solid fa-user absolute right-7 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
                 </div>
@@ -46,7 +56,7 @@ const Login = () => {
                     value={password}
                     onChange={handlePasswordChange}
                     required
-                    className="rounded font-semibold py-0.5 px-6 my-1 bg-slate-100 border-gray-500 border"
+                    className=""
                   />
                   <i className="fa-solid fa-lock absolute right-7 top-1/2 transform -translate-y-1/2 text-gray-500"></i>
                 </div>
@@ -76,13 +86,17 @@ const Login = () => {
               />
             </div>
           </div>
-          <div>
+          <div className="">
             <p className="text-center font-semibold ">
               ¿Olvidaste tu contraseña?{" "}
-              <a href="/forgot" className="text-blue-500">
-                Recuperar
-              </a>
+              <button
+                onClick={handleForgotPasswordClick}
+                style={{ color: "green" }}
+              >
+                Recuperala
+              </button>
             </p>
+            {showChangePass && <ChangePass onClose={handleClosePopup} />}
           </div>
           <div>
             <p className="text-center font-semibold ">

@@ -7,5 +7,5 @@ import MainRoutes from '../../../routes/indexRoutes'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <MainRoutes />
-  </StrictMode>,
+  </StrictMode>
 )
