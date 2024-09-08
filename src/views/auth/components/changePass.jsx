@@ -15,24 +15,21 @@ const ChangePass = ({ onClose }) => {
     handleSubmitCode,
   } = ChangeAuth();
 
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-      <div className="relative bg-white rounded-md p-5 ">
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-2xl rounded-full"
-        >
-          <i className="fa-solid fa-circle-xmark"></i>
-        </button>
-        {step === 1 ? (
+  const renderStepContent = () => {
+    switch (step) {
+      case 1:
+        return (
           <div>
             <div className="grid justify-center mb-8">
+              <div className="grid justify-center items-center text-2xl mb-4">
+                <i className="fa-solid fa-id-card"></i>
+              </div>
               <h2 className="text-center font-bold text-2xl mb-4">
-                Recuperar contraseña
+                Olvidaste tu contraseña?
               </h2>
               <p className="items-center text-center text-sm">
-                Por favor, ingresa tu correo electronico. <br />
-                Recibirás un código para crear la contraseña nueva.
+                No te preocupes, ingresa tu correo electrónico. <br />
+                Recibirás un código para crear una nueva contraseña.
               </p>
             </div>
             <form onSubmit={handleSubmitEmail}>
@@ -54,7 +51,9 @@ const ChangePass = ({ onClose }) => {
               </div>
             </form>
           </div>
-        ) : (
+        );
+      case 2:
+        return (
           <div className="grid justify-center mb-8">
             <h2 className="text-center font-bold text-2xl mb-4">
               Ingresar código
@@ -87,7 +86,27 @@ const ChangePass = ({ onClose }) => {
               />
             </div>
           </div>
-        )}
+        );
+      case 3:
+      case 4:
+      default:
+        return (
+          <div>
+            <h2>Paso no reconocido</h2>
+          </div>
+        );
+    }
+  };
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+      <div className="relative bg-white rounded-md p-5 ">
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-2xl rounded-full"
+        >
+          <i className="fa-solid fa-circle-xmark"></i>
+        </button>
+        {renderStepContent()}
       </div>
     </div>
   );
