@@ -2,9 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { Span } from "./logo";
 import { Button } from "./button";
 
-const NavLogin = ( isLoginPage) => {
+const NavLogin = ( isLoginPage ) => {
   const [isMenuHidden, setIsMenuHidden] = useState(true);
   const menuRef = useRef(null);
+
+  isLoginPage = isLoginPage.isLoginPage;
 
   const toggleMenu = (event) => {
     event.stopPropagation(); // Evita que el evento se propague y cierre el menú inmediatamente
@@ -57,8 +59,8 @@ const NavLogin = ( isLoginPage) => {
             <div className="flex items-center gap-4">
               <div>
                 <Button
-                  text="Registrate"
-                  navigateTo="/register"
+                  text={isLoginPage ? "Regístrate" : "Iniciar Sesión"}
+                  navigateTo={isLoginPage ? "/register" : "/login"}
                   className="border rounded-md border-green-400"
                 />
               </div>
