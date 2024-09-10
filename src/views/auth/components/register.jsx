@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../../global/elements/button";
 import { Input } from "../../global/elements/inputs";
 import useRegister from "../hooks/registerAuth";
+import VerificationEmail from "../components/verificationEmail";
 
 const Register = () => {
   const {
-    name,
-    phone,
-    date,
+    nombre,
+    telefono,
+    fechaNacimiento,
     genero,
-    city,
-    country,
+    ciudad,
+    pais,
     email,
     password,
-    confirmPassword,
+    passwordConfirm,
     handleNameChange,
     handlePhoneChange,
     handleDateChange,
@@ -25,6 +26,16 @@ const Register = () => {
     handleConfirmPasswordChange,
     handleRegister,
   } = useRegister();
+
+  const [showChangePass, setShowChangePass] = useState(false);
+
+  const handleForgotPasswordClick = () => {
+    setShowChangePass(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowChangePass(false);
+  };
 
   return (
     <div className="grid grid-cols-1 border rounded-3xl border-green-400 p-9 shadow-custom flex-wrap m-10">
@@ -39,7 +50,7 @@ const Register = () => {
           <Input
             type="text"
             placeholder="Nombre de usuario"
-            value={name}
+            value={nombre}
             onChange={handleNameChange}
             required
           />
@@ -47,28 +58,29 @@ const Register = () => {
         </div>
         <div className="flex justify-center">
           <Input
-            type="telefono"
+            type="tel"
             placeholder="telefono"
-            value={phone}
+            value={telefono}
             onChange={handlePhoneChange}
             required
           />
           <i className="fa-solid fa-phone relative right-7 top-4 transform text-gray-500"></i>
         </div>
-        <div className="lg:col-span-2 flex items-center lg:justify-between lg:px-6 gap-2">
+        <div className="lg:col-span-2 col-span-1 flex items-center lg:justify-between lg:px-6 gap-2">
           <h1 className="font-semibold text-xl">Fecha de nacimiento:</h1>
           <Input
             id="fecha-nacimiento"
             type="date"
             placeholder="Fecha de nacimiento"
-            value={date}
+            value={fechaNacimiento}
             onChange={handleDateChange}
             required
+            className="lg:w-56"
           />
         </div>
         <div className="lg:col-span-2 flex lg:justify-end justify-center">
           <Input
-            type="genero"
+            type="text"
             placeholder="Genero"
             value={genero}
             onChange={handleGeneroChange}
@@ -80,7 +92,7 @@ const Register = () => {
           <Input
             type="text"
             placeholder="Ciudad"
-            value={city}
+            value={ciudad}
             onChange={handleCityChange}
             required
           />
@@ -90,7 +102,7 @@ const Register = () => {
           <Input
             type="text"
             placeholder="País"
-            value={country}
+            value={pais}
             onChange={handleCountryChange}
             required
           />
@@ -120,7 +132,7 @@ const Register = () => {
           <Input
             type="password"
             placeholder="Confirmar password"
-            value={confirmPassword}
+            value={passwordConfirm}
             onChange={handleConfirmPasswordChange}
             required
           />
@@ -129,6 +141,7 @@ const Register = () => {
         <div className="lg:flex lg:col-span-2 lg:justify-center flex justify-center">
           <Button
             text="Registrarse"
+            onClick={handleForgotPasswordClick}
             style={{
               backgroundColor: "#0081DA",
               color: "#ecf0f1",
@@ -136,6 +149,7 @@ const Register = () => {
               width: "250px",
             }}
           />
+          {showChangePass && <VerificationEmail onClose={handleClosePopup} />}
         </div>
       </form>
     </div>

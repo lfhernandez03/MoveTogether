@@ -3,15 +3,15 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const useRegister = () => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [date, setDate] = useState("");
+  const [nombre, setName] = useState("");
+  const [telefono, setPhone] = useState("");
+  const [fechaNacimiento, setDate] = useState("");
   const [genero, setGenero] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
+  const [ciudad, setCity] = useState("");
+  const [pais, setCountry] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordConfirm, setConfirmPassword] = useState("");
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -51,75 +51,81 @@ const useRegister = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+
+    if (password !== passwordConfirm) {
+      toast.error("Las contraseñas no coinciden");
+      return;
+    }
+
+    if (genero !== "Masculino" && genero !== "Femenino") {
+      toast.error("El genero debe ser Masculino o Femenino");
+      return;
+    }
+
+    const nombreArray = nombre.trim().split(" ");
+    if (nombreArray.length < 2) {
+      toast.error("El nombre debe contener al menos dos palabras");
+      return;
+    }
+
     try {
       const payload = {
-        name,
-        phone,
-        genero,
-        city,
-        country,
+        nombre,
         email,
         password,
-        confirmPassword,
+        passwordConfirm,
+        telefono,
+        fechaNacimiento,
+        genero,
+        ubicacion: {
+          pais,
+          ciudad,
+        },
       };
+
       console.log("Enviando JSON:", JSON.stringify(payload));
+
       const response = await fetch(
-        "https://move-together-back.vercel.app/api/crearUsuario",
+        "https://move-together-back.vercel.app/api/usuarios/crear",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            name,
-            phone,
-            genero,
-            city,
-            country,
-            email,
-            password,
-            confirmPassword,
-          }),
+          body: JSON.stringify(payload),
         }
       );
+
+      const errorData = await response.json();
       if (!response.ok) {
-        const errorData = await response.json();
-        let errorMessage;
-        if (
-          response.status === 400 &&
-          errorData.errors &&
-          errorData.errors.length > 0
-        ) {
-          errorMessage = errorData.errors[0].msg;
+        let errorMessage = "Ocurrió un error inesperado";
+        if (response.status === 400 && errorData.errors) {
+          errorMessage = errorData.errores[0].msg;
         } else if (response.status === 400) {
-          errorMessage = errorData.message;
+          errorMessage = errorData.errores[0].msg;
         } else if (response.status === 500) {
           errorMessage = "Error en la solicitud de registro";
-        } else {
-          errorMessage = "Ocurrió un error inesperado";
         }
         toast.error(errorMessage);
       } else {
-        const data = await response.json();
-        if (data.success || response.ok) {
-          toast.success("Usuario registrado correctamente");
-        }
+        toast.success("Usuario registrado correctamente");
       }
     } catch (error) {
-      console.error("Error al registrar usuario");
+      console.error("Error al registrar usuario", error);
+      toast.error("Error al procesar la solicitud, intente nuevamente.");
     }
   };
 
   return {
-    name,
-    phone,
-    date,
+    nombre,
+    telefono,
+    fechaNacimiento,
     genero,
-    city,
-    country,
+    ciudad,
+    pais,
     email,
     password,
-    confirmPassword,
+    passwordConfirm,
     handleNameChange,
     handlePhoneChange,
     handleDateChange,
