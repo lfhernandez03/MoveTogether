@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const ChangeAuth = () => {
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
-  const [step, setStep] = useState(1); // 1: email, 2: code
+  const [step, setStep] = useState(1); // 1: email, 2: code, 3: password, 4: success
   const [error, setError] = useState("");
 
   const handleEmailChange = (e) => {
@@ -44,7 +44,7 @@ const ChangeAuth = () => {
         toast.error(errorMessage);
         return;
       } else {
-        setStep(2);
+        setStep(2); //Cuando la solicitud es exitosa, cambiamos el paso 
       }
     } catch (error) {
       setError("Error en la solicitud de cambio de contraseña");

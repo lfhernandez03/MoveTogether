@@ -16,8 +16,9 @@ const ChangePass = ({ onClose }) => {
   } = ChangeAuth();
 
   const renderStepContent = () => {
-    switch (step) {
-      case 1:
+    //Switch para renderizar el contenido de acuerdo al paso
+    switch (step) { // 1: email, 2: code, 3: password, 4: success
+      case 1: // Email
         return (
           <div>
             <div className="grid justify-center mb-8">
@@ -52,7 +53,7 @@ const ChangePass = ({ onClose }) => {
             </form>
           </div>
         );
-      case 2:
+      case 2: // Code
         return (
           <div className="grid justify-center mb-8">
             <h2 className="text-center font-bold text-2xl mb-4">
@@ -87,8 +88,8 @@ const ChangePass = ({ onClose }) => {
             </div>
           </div>
         );
-      case 3:
-      case 4:
+      case 3: // Password
+      case 4: // Success
       default:
         return (
           <div>
