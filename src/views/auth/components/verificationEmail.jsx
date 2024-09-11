@@ -5,11 +5,14 @@ import VerificationAuth from "../hooks/verificationAuth";
 
 const VerificationEmail = ({ onClose }) => {
   const {
-    code,
+    codigo,
+    email,
     step,
     error,
     handleCodeChange,
+    handleEmailChange,
     handleSubmitCode,
+    handleSubmitChange,
   } = VerificationAuth();
 
   const renderStepContent = () => {
@@ -21,7 +24,7 @@ const VerificationEmail = ({ onClose }) => {
               Ingresar código
             </h2>
             <p className="items-center text-center text-sm">
-              Por favor, ingresa el código de 4 dígitos que recibiste.
+              Por favor, ingresa el código de 6 dígitos que recibiste.
             </p>
             <form
               onSubmit={handleSubmitCode}
@@ -30,8 +33,8 @@ const VerificationEmail = ({ onClose }) => {
               <div className="relative w-full max-w-xs">
                 <Input
                   type="text"
-                  placeholder="Código de 4 dígitos"
-                  value={code}
+                  placeholder="Código de 6 dígitos"
+                  value={codigo}
                   onChange={handleCodeChange}
                   required
                   className="pl-10 pr-4 py-2 w-full border rounded-md"
@@ -49,8 +52,10 @@ const VerificationEmail = ({ onClose }) => {
             </div>
           </div>
         );
-      case 3:
-      case 4:
+      case 2:
+        return(
+          <h1>Holaaaa</h1>
+        );
       default:
         return (
           <div>

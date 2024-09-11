@@ -6,13 +6,16 @@ import ChangeAuth from "../hooks/changeAuth";
 const ChangePass = ({ onClose }) => {
   const {
     email,
-    code,
+    codigo,
+    nuevaContrasenia,
     step,
     error,
     handleEmailChange,
     handleCodeChange,
+    handlePasswordChange,
     handleSubmitEmail,
     handleSubmitCode,
+    handleSubmitPassword,
   } = ChangeAuth();
 
   const renderStepContent = () => {
@@ -60,7 +63,7 @@ const ChangePass = ({ onClose }) => {
               Ingresar código
             </h2>
             <p className="items-center text-center text-sm">
-              Por favor, ingresa el código de 4 dígitos que recibiste.
+              Por favor, ingresa el código de 6 dígitos que recibiste.
             </p>
             <form
               onSubmit={handleSubmitCode}
@@ -69,8 +72,8 @@ const ChangePass = ({ onClose }) => {
               <div className="relative w-full max-w-xs">
                 <Input
                   type="text"
-                  placeholder="Código de 4 dígitos"
-                  value={code}
+                  placeholder="Código de 6 dígitos"
+                  value={codigo}
                   onChange={handleCodeChange}
                   required
                   className="pl-10 pr-4 py-2 w-full border rounded-md"
@@ -88,8 +91,59 @@ const ChangePass = ({ onClose }) => {
             </div>
           </div>
         );
-      case 3: // Password
-      case 4: // Success
+      case 3:
+        return (
+          <div className="grid justify-center mb-8">
+            <h2 className="text-center font-bold text-2xl mb-4">
+              Ingresa nueva contraseña
+            </h2>
+            <p className="items-center text-center text-sm">
+              Por favor, ingresa tu nueva contraseñia.
+            </p>
+            <p className="items-center text-center text-sm">
+            La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial
+            </p>
+            <form
+              onSubmit={handleSubmitPassword}
+              className="relative flex justify-center mb-4"
+            >
+              <div className="relative w-full max-w-xs">
+                <Input
+                  type="password"
+                  placeholder="Nueva contraseña"
+                  value={nuevaContrasenia}
+                  onChange={handlePasswordChange}
+                  required
+                  className="pl-10 pr-4 py-2 w-full border rounded-md"
+                />
+                <i className="fa-solid fa-key absolute left-3 top-1/2 transform -translate-y-1/2 text-black"></i>
+                {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+              </div>
+            </form>
+            <div className="flex justify-center">
+              <Button
+                text="Verificar"
+                className="bg-green-500 text-white rounded-md"
+                onClick={handleSubmitPassword}
+              />
+            </div>
+          </div>
+        );
+      case 4:
+        return (
+          <div className="grid justify-center mb-8">
+            <h2 className="text-center font-bold text-2xl mb-4">
+              Contraseña actualizada
+            </h2>
+            <div className="flex justify-center">
+              <Button
+                text="Cerrar"
+                onClick={onClose}
+                className="bg-green-500 text-white rounded-md"
+              />
+            </div>
+          </div>
+        );
       default:
         return (
           <div>
