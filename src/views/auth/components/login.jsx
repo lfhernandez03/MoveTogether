@@ -101,7 +101,7 @@ const Login = () => {
           <div>
             <p className="text-center font-semibold ">
               ¿No tienes cuenta?{" "}
-              <a href="/register" className="text-blue-500">
+              <a href="/registerPage" className="text-blue-500">
                 Regístrate
               </a>
             </p>
