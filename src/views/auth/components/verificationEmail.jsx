@@ -54,7 +54,18 @@ const VerificationEmail = ({ onClose }) => {
         );
       case 2:
         return(
-          <h1>Holaaaa</h1>
+          <div className="grid justify-center mb-8">
+            <h2 className="text-center font-bold text-2xl mb-4">
+                Email confirmado
+            </h2>
+            <div className="flex justify-center">
+              <Button
+                text="Cerrar"
+                onClick={onClose}
+                className="bg-green-500 text-white rounded-md"
+              />
+            </div>
+          </div>
         );
       default:
         return (
