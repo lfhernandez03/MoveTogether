@@ -3,15 +3,17 @@ import { Button } from "../../global/elements/button";
 import { Input } from "../../global/elements/inputs";
 import useRegister from "../hooks/registerAuth";
 import VerificationEmail from "../components/verificationEmail";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
   const {
-    nombre,
-    telefono,
-    fechaNacimiento,
-    genero,
-    ciudad,
-    pais,
+    fullname,
+    phoneNumber,
+    birthDate,
+    gender,
+    city,
+    country,
     email,
     password,
     passwordConfirm,
@@ -27,30 +29,57 @@ const Register = () => {
     handleRegister,
   } = useRegister();
 
-  const [showChangePass, setShowChangePass] = useState(false);
+  const [showVerificationPopup, setShowVerificationPopup] = useState(false);
 
-  const handleForgotPasswordClick = () => {
-    setShowChangePass(true);
+  const handleRegisterSubmit = (e) => {
+    e.preventDefault(); // Prevenir comportamiento por defecto del formulario
+    if (validateForm()) {
+      handleRegister(e); // Llama a la función de registro si la validación es correcta
+      setShowVerificationPopup(true); // Mostrar el popup si todo es correcto
+    }
+  };
+  
+  const validateForm = () => {
+    if (
+      !fullname ||
+      !phoneNumber ||
+      !birthDate ||
+      !gender ||
+      !city ||
+      !country ||
+      !email ||
+      !password ||
+      !passwordConfirm
+    ) {
+      toast.error("Por favor completa todos los campos.");
+      return false;
+    }
+    if (password !== passwordConfirm) {
+      toast.error("Las contraseñas no coinciden.");
+      return false;
+    }
+    return true;
   };
 
   const handleClosePopup = () => {
-    setShowChangePass(false);
+    setShowVerificationPopup(false);
   };
 
   return (
     <div className="grid grid-cols-1 border rounded-3xl border-green-400 p-9 shadow-custom flex-wrap m-10">
+      <ToastContainer />
       <h1 className="text-center font-bold text-3xl mb-10">
         Formulario de Registro
       </h1>
       <form
-        onSubmit={handleRegister}
+        onSubmit={handleRegisterSubmit}
         className="lg:grid lg:grid-cols-2 lg:gap-4 lg:space-y-0 grid-cols-1 space-y-2"
       >
         <div className="flex justify-center">
           <Input
             type="text"
             placeholder="Nombre de usuario"
-            value={nombre}
+            value={fullname}
             onChange={handleNameChange}
             required
           />
@@ -60,7 +89,7 @@ const Register = () => {
           <Input
             type="tel"
             placeholder="telefono"
-            value={telefono}
+            value={phoneNumber}
             onChange={handlePhoneChange}
             required
           />
@@ -72,7 +101,7 @@ const Register = () => {
             id="fecha-nacimiento"
             type="date"
             placeholder="Fecha de nacimiento"
-            value={fechaNacimiento}
+            value={birthDate}
             onChange={handleDateChange}
             required
             className="lg:w-56"
@@ -82,7 +111,7 @@ const Register = () => {
           <Input
             type="text"
             placeholder="Genero"
-            value={genero}
+            value={gender}
             onChange={handleGeneroChange}
             required
           />
@@ -92,7 +121,7 @@ const Register = () => {
           <Input
             type="text"
             placeholder="Ciudad"
-            value={ciudad}
+            value={city}
             onChange={handleCityChange}
             required
           />
@@ -102,7 +131,7 @@ const Register = () => {
           <Input
             type="text"
             placeholder="País"
-            value={pais}
+            value={country}
             onChange={handleCountryChange}
             required
           />
@@ -110,7 +139,7 @@ const Register = () => {
         </div>
         <div className="lg:col-span-2 flex justify-center">
           <Input
-            type="text"
+            type="email"
             placeholder="correo"
             value={email}
             onChange={handleEmailChange}
@@ -141,7 +170,7 @@ const Register = () => {
         <div className="lg:flex lg:col-span-2 lg:justify-center flex justify-center">
           <Button
             text="Registrarse"
-            onClick={handleForgotPasswordClick}
+            type="submit" // Cambiado a tipo submit
             style={{
               backgroundColor: "#0081DA",
               color: "#ecf0f1",
@@ -149,7 +178,7 @@ const Register = () => {
               width: "250px",
             }}
           />
-          {showChangePass && <VerificationEmail onClose={handleClosePopup} />}
+          {showVerificationPopup && <VerificationEmail onClose={handleClosePopup} />}
         </div>
       </form>
     </div>
@@ -157,3 +186,4 @@ const Register = () => {
 };
 
 export default Register;
+

@@ -3,8 +3,8 @@ import { toast } from "react-toastify";
 
 const ChangeAuth = () => {
   const [email, setEmail] = useState("");
-  const [codigo, setCode] = useState("");
-  const [nuevaContrasenia, setPassword] = useState("");
+  const [code, setCode] = useState("");
+  const [newPassword, setPassword] = useState("");
   const [step, setStep] = useState(1); // 1: email, 2: code, 3: password, 4: success
   const [error, setError] = useState("");
 
@@ -59,13 +59,13 @@ const ChangeAuth = () => {
 
   const handleSubmitCode = async (event) => {
     event.preventDefault();
-    if (!codigo) {
+    if (!code) {
       setError("El código es requerido.");
       return;
     }
   
     try {
-      const payload = { codigo };
+      const payload = { code };
       console.log("Enviando JSON:", JSON.stringify(payload));
       const response = await fetch(
         "https://move-together-back.vercel.app/api/verificar-codigo-cambio",
@@ -94,12 +94,12 @@ const ChangeAuth = () => {
 
   const handleSubmitPassword = async (event) => {
     event.preventDefault();
-    if (!nuevaContrasenia) {
+    if (!newPassword) {
       setError("La contraseña es requerida.");
       return;
     }
     try {
-      const payload = { email, nuevaContrasenia };
+      const payload = { email, newPassword };
       console.log("Enviando JSON:", JSON.stringify(payload));
       const response = await fetch(
         "https://move-together-back.vercel.app/api/nueva-contrasenia",
@@ -128,8 +128,8 @@ const ChangeAuth = () => {
 
   return {
     email,
-    codigo,
-    nuevaContrasenia,
+    code,
+    newPassword,
     step,
     error,
     handleEmailChange,
