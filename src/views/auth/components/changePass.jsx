@@ -6,8 +6,8 @@ import ChangeAuth from "../hooks/changeAuth";
 const ChangePass = ({ onClose }) => {
   const {
     email,
-    codigo,
-    nuevaContrasenia,
+    code,
+    newPassword,
     step,
     error,
     handleEmailChange,
@@ -73,7 +73,7 @@ const ChangePass = ({ onClose }) => {
                 <Input
                   type="text"
                   placeholder="Código de 6 dígitos"
-                  value={codigo}
+                  value={code}
                   onChange={handleCodeChange}
                   required
                   className="pl-10 pr-4 py-2 w-full border rounded-md"
@@ -111,7 +111,7 @@ const ChangePass = ({ onClose }) => {
                 <Input
                   type="password"
                   placeholder="Nueva contraseña"
-                  value={nuevaContrasenia}
+                  value={newPassword}
                   onChange={handlePasswordChange}
                   required
                   className="pl-10 pr-4 py-2 w-full border rounded-md"
