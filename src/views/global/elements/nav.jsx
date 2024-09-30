@@ -39,18 +39,22 @@ const NavLogin = ( isLoginPage ) => {
           />
           {!isMenuHidden && (
             <div className="absolute right-0 mt-1 w-48 bg-white border border-gray-200 rounded-md shadow-lg">
-              <a
-                href={isLoginPage ? "/register" : "/login"}
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >
-                {isLoginPage ? "Regístrate" : "Iniciar Sesión"}
-              </a>
-              <a
-                href="#"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >
-                Nosotros
-              </a>
+              <div className="flex flex-col justify-center items-center">
+                <Button
+                  text={isLoginPage ? "Regístrate" : "Iniciar Sesión"}
+                  navigateTo={isLoginPage ? "/register" : "/login"}
+                  className="text-md w-full text-center hover:bg-gray-100"
+                >
+                  {isLoginPage ? "Regístrate" : "Iniciar Sesión"}
+                </Button>
+                <Button
+                  text="Nosotros"
+                  navigateTo="#"
+                  className="text-md w-full text-center hover:bg-gray-100"
+                >
+                  Nosotros
+                </Button>
+              </div> 
             </div>
           )}
         </div>
