@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "./button";
-import { Span } from "./logo";
 
 const Navbar = (props) => {
   const [isMenuHidden, setIsMenuHidden] = useState(false);

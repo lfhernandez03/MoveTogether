@@ -1,5 +1,4 @@
 import Register from "../auth/components/register";
-import { Navbar } from "../global/elements/navbar";
 import { NavLogin } from "../global/elements/nav";
 
 const RegisterPage = () => {

@@ -3,12 +3,12 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const useRegister = () => {
-  const [nombre, setName] = useState("");
-  const [telefono, setPhone] = useState("");
-  const [fechaNacimiento, setDate] = useState("");
-  const [genero, setGenero] = useState("");
-  const [ciudad, setCity] = useState("");
-  const [pais, setCountry] = useState("");
+  const [fullname, setName] = useState("");
+  const [phoneNumber, setPhone] = useState("");
+  const [birthDate, setDate] = useState("");
+  const [gender, setGenero] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setConfirmPassword] = useState("");
@@ -57,12 +57,12 @@ const useRegister = () => {
       return;
     }
 
-    if (genero !== "Masculino" && genero !== "Femenino") {
+    if (gender !== "Masculino" && gender !== "Femenino") {
       toast.error("El genero debe ser Masculino o Femenino");
       return;
     }
 
-    const nombreArray = nombre.trim().split(" ");
+    const nombreArray = fullname.trim().split(" ");
     if (nombreArray.length < 2) {
       toast.error("El nombre debe contener al menos dos palabras");
       return;
@@ -70,16 +70,16 @@ const useRegister = () => {
 
     try {
       const payload = {
-        nombre,
+        fullname,
         email,
         password,
         passwordConfirm,
-        telefono,
-        fechaNacimiento,
-        genero,
-        ubicacion: {
-          pais,
-          ciudad,
+        phoneNumber,
+        birthDate,
+        gender,
+        ubi: {
+          country,
+          city,
         },
       };
 
@@ -89,6 +89,7 @@ const useRegister = () => {
         "https://move-together-back.vercel.app/api/usuarios/crear",
         {
           method: "POST",
+          // mode: "no-cors",
           headers: {
             "Content-Type": "application/json",
           },
@@ -99,7 +100,7 @@ const useRegister = () => {
       const errorData = await response.json();
       if (!response.ok) {
         let errorMessage = "Ocurrió un error inesperado";
-        if (response.status === 400 && errorData.errors) {
+        if (response.status === 400 && errorData.errores) {
           errorMessage = errorData.errores[0].msg;
         } else if (response.status === 400) {
           errorMessage = errorData.errores[0].msg;
@@ -117,12 +118,12 @@ const useRegister = () => {
   };
 
   return {
-    nombre,
-    telefono,
-    fechaNacimiento,
-    genero,
-    ciudad,
-    pais,
+    fullname,
+    phoneNumber,
+    birthDate,
+    gender,
+    city,
+    country,
     email,
     password,
     passwordConfirm,
