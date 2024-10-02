@@ -28,7 +28,7 @@ const NavHome = () => {
 
   return (
     <nav
-      className="flex md:justify-between justify-center items-center h-20 md:h-16 bg-gray-300 text-black relative shadow-sm font-mono"
+      className="flex md:justify-between justify-center items-center h-20 md:h-16 bg-gray-300 text-black relative shadow-sm"
       role="navigation"
     >
       <div className="px-4 cursor-pointer flex flex-col md:hidden">
@@ -37,7 +37,7 @@ const NavHome = () => {
             <NavigateH navigateTo="/" bgColor="white" icon="fa-user"/>
             <div className="bg-gray-500 w-40 h-8 rounded-3xl flex justify-between items-center p-4 text-white">
                 Buscar
-                <i className="fa-solid fa-magnifying-glass relative "></i>
+                <i className="fa-solid fa-magnifying-glass relative"></i>
             </div>
             <NavigateH navigateTo="/" textColor="blue-600" icon="fa-bell"/>
             <NavigateH navigateTo="/" textColor="green-600" icon="fa-message"/>
@@ -84,4 +84,4 @@ const NavHome = () => {
   );
 };
 
-export { NavHome };
+export default NavHome ;
