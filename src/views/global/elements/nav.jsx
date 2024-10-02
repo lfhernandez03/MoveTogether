@@ -42,7 +42,7 @@ const NavLogin = ( isLoginPage ) => {
               <div className="flex flex-col justify-center items-center">
                 <Button
                   text={isLoginPage ? "Regístrate" : "Iniciar Sesión"}
-                  navigateTo={isLoginPage ? "/register" : "/login"}
+                  navigateTo={isLoginPage ? "/auth/register" : "/auth/login"}
                   className="text-md w-full text-center hover:bg-gray-100"
                 >
                   {isLoginPage ? "Regístrate" : "Iniciar Sesión"}
@@ -64,7 +64,7 @@ const NavLogin = ( isLoginPage ) => {
               <div>
                 <Button
                   text={isLoginPage ? "Regístrate" : "Iniciar Sesión"}
-                  navigateTo={isLoginPage ? "/register" : "/login"}
+                  navigateTo={isLoginPage ? "/auth/register" : "/auth/login"}
                   className="border rounded-md border-green-400"
                 />
               </div>

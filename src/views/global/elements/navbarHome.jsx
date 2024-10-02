@@ -26,7 +26,7 @@ const NavHome = () => {
 
   return (
     <nav
-      className="flex md:justify-between justify-center items-center h-20 md:h-16 bg-gray-300 text-black relative shadow-sm font-mono"
+      className="flex md:justify-between justify-center items-center h-20 md:h-16 bg-gray-300 text-black relative shadow-sm"
       role="navigation"
     >
       <div className="px-4 cursor-pointer flex flex-col md:hidden">
@@ -37,7 +37,7 @@ const NavHome = () => {
             </a>
             <div className="bg-gray-500 w-40 h-8 rounded-3xl flex justify-between items-center p-4 text-white">
                 Buscar
-                <i className="fa-solid fa-magnifying-glass relative "></i>
+                <i className="fa-solid fa-magnifying-glass relative"></i>
             </div>
             <a href="/" className="text-blue-600 rounded-3xl w-8 h-8 flex justify-center items-center">
                 <i className="fa-solid fa-bell relative"></i>
@@ -146,4 +146,4 @@ const NavHome = () => {
   );
 };
 
-export { NavHome };
+export default NavHome ;

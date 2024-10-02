@@ -16,7 +16,7 @@ export const Button = (props) => {
     <button
       onClick={handleClick}
       value={props.value}
-      className={`font-semibold py-2 px-6 my-3 flex items-center justify-center ${props.className}`}
+      className={`font-semibold py-2 px-6 my-3 flex items-center justify-center text-center ${props.className}`}
       style={props.style}
     >
       {props.icon && <i className={`${props.icon} `}></i>}
