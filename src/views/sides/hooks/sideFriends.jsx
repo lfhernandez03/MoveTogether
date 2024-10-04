@@ -1,9 +1,10 @@
 import { React, useEffect, useState } from "react";
+import UserAvatar from "../../global/elements/userAvatar";
 
 const sideFriends = () => {
   const [friends, setFriends] = useState([]);
 
-  const handleSideFriends = async (e) => {
+  const handleSideFriends = async () => {
     try {
       const response = await fetch(
         "https://move-together-back.vercel.app/api/listar/amigos?email=linamunoz438@gmail.com",
@@ -24,10 +25,11 @@ const sideFriends = () => {
     }
   };
 
-  return {
-    friends,
-    handleSideFriends,
-  };
+  useEffect(() => {
+    handleSideFriends();
+  }, []);
+
+  return { friends, handleSideFriends };
 };
 
 export default sideFriends;
