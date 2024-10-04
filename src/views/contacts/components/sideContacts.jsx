@@ -8,13 +8,6 @@ const SideContacts = (props) => {
       <div className="flex justify-center select-none">
         <UserAvatar />
       </div>
-      <div className="justify-center items-center">
-        <span
-          className={`font-medium select-none ${props.className}`}
-        >
-          {props.value}
-        </span>
-      </div>
     </div>
   );
 };
