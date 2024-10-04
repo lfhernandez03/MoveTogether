@@ -12,6 +12,7 @@ export const Button = (props) => {
       navigate(props.navigateTo);
     }
   };
+  
   return (
     <button
       onClick={handleClick}
