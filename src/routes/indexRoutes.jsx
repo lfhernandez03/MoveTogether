@@ -13,7 +13,7 @@ const MainRoutes = () => {
         <Route path="/" element={<MainLayout />}>
           <Route path="/auth/*" element={<AuthRoutes />} />
           <Route path="/home" element={<HomePage />} />
-          <Route path="/wellcome" element={<WellcomePage />} />
+          <Route path="/welcome" element={<WellcomePage />} />
           <Route index element={<LoginPage />} />
         </Route>
       </Routes>

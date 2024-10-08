@@ -1,5 +1,5 @@
 import React from "react";
-import UserPost from "../../global/elements/userPost";
+import { UserPost } from "../../global/elements/userPost";
 import { Input } from "../../global/elements/inputs";
 import { Button } from "../../global/elements/button";
 

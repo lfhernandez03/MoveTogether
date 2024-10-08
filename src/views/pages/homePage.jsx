@@ -1,6 +1,6 @@
 import React from "react";
 import NavHome from "../global/elements/navbarHome";
-import MakePost from "../posts/components/makePost";
+import Feed from "../posts/components/feed";
 import { SideBarIz, SideBarDer } from "../sides/components/sideBars";
 
 const HomePage = () => {
@@ -15,7 +15,7 @@ const HomePage = () => {
             <SideBarIz />
           </div>
           <div className="flex-grow flex justify-center items-start mt-6 p-4">
-            <MakePost />
+            <Feed />
           </div>
           <div className="sticky top-0 h-full">
             <SideBarDer />
