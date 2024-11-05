@@ -61,24 +61,24 @@ const NavHome = () => {
                     onClick={toggleMenu}
                 />
                 {!isMenuHidden && (
-                    <div className="absolute right-4 top-16 p-4 w-60 bg-white border border-gray-200 rounded-md shadow-lg">
+                    <div className="absolute right-4 top-16 p-4 w-56 bg-white border border-gray-200 rounded-md shadow-lg">
                         <h1>A donde quieres ir?</h1>
-                        <CardOption navigateTo="/" icon="fa-house" label="Home" className="w-52"/>
-                        <CardOption navigateTo="/" icon="fa-user" label="Perfil" className="w-52"/>
-                        <CardOption navigateTo="/" icon="fa-user-group" label="Amigos" className="w-52"/>
-                        <CardOption navigateTo="/" icon="fa-people-group" label="Comunidades" className="w-52"/>
-                        <CardOption navigateTo="/" icon="fa-map" label="Rutas" className="w-52"/>
-                        <CardOption navigateTo="/" icon="fa-circle-check" label="En linea" className="w-52"/>
+                        <CardOption navigateTo="/" icon="fa-house" label="Home" className="w-44"/>
+                        <CardOption navigateTo="/" icon="fa-user" label="Perfil" className="w-44"/>
+                        <CardOption navigateTo="/" icon="fa-user-group" label="Amigos" className="w-44"/>
+                        <CardOption navigateTo="/" icon="fa-people-group" label="Comunidades" className="w-44"/>
+                        <CardOption navigateTo="/" icon="fa-map" label="Rutas" className="w-44"/>
+                        <CardOption navigateTo="/" icon="fa-circle-check" label="En linea" className="w-44"/>
                         <div href={confiRef}>
-                          <CardOption onClick={toggleConfi} icon="fa-gear" label="Ajustes" className="w-52"/>
+                          <CardOption onClick={toggleConfi} icon="fa-gear" label="Ajustes" className="w-44"/>
                           {!confiHidden && (
-                            <div className="absolute right-60 top-72 p-4 w-72 bg-white border border-gray-200 rounded-md shadow-lg">
-                              <CardOption navigateTo="/" icon="fa-gear" label="Cambiar Contraseña"/>
-                              <CardOption navigateTo="/" icon="fa-right-from-bracket" label="Cerrar Sesión"/>
+                            <div className="absolute right-10 top-99 p-4 bg-white border border-gray-200 rounded-md shadow-lg">
+                              <CardOption navigateTo="/" icon="fa-gear" label="Cambiar Contraseña" className="w-48"/>
+                              <CardOption navigateTo="/" icon="fa-right-from-bracket" label="Cerrar Sesión" className="w-48"/>
                             </div>
                           )}
                         </div>
-                        <CardOption navigateTo="/" icon="fa-right-from-bracket" label="Cerrar Sesión" className="w-52"/>
+                        <CardOption navigateTo="/" icon="fa-right-from-bracket" label="Cerrar Sesión" className="w-44"/>
                     </div>
                 )}
             </div>
