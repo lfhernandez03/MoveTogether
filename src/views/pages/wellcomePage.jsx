@@ -13,7 +13,7 @@ const WellcomePage = () => {
   const handleStart = () => {
     setFadeOut(true);
     setTimeout(() => {
-      navigate("/wellcome/info");
+      navigate("/welcome/info");
     }, 1000);
     console.log(localStorage.getItem("authToken"));
   };
