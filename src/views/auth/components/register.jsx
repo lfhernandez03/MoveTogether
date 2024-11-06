@@ -66,7 +66,7 @@ const Register = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 border rounded-3xl border-green-400 p-9 shadow-custom flex-wrap m-10">
+    <div className="grid grid-cols-1 border rounded-3xl border-green-400 p-20 shadow-custom flex-wrap m-10">
       <ToastContainer />
       <h1 className="text-center font-bold text-3xl mb-10">
         Formulario de Registro
@@ -95,27 +95,15 @@ const Register = () => {
           />
           <i className="fa-solid fa-phone relative right-7 top-4 transform text-gray-500"></i>
         </div>
-        <div className="lg:col-span-2 col-span-1 flex items-center lg:justify-between lg:px-6 gap-2">
-          <h1 className="font-semibold text-xl">Fecha de nacimiento:</h1>
+        <div className="flex justify-center">
           <Input
-            id="fecha-nacimiento"
-            type="date"
-            placeholder="Fecha de nacimiento"
-            value={birthDate}
-            onChange={handleDateChange}
-            required
-            className="lg:w-56"
-          />
-        </div>
-        <div className="lg:col-span-2 flex lg:justify-end justify-center">
-          <Input
-            type="text"
-            placeholder="Genero"
-            value={gender}
-            onChange={handleGeneroChange}
+            type="email"
+            placeholder="correo"
+            value={email}
+            onChange={handleEmailChange}
             required
           />
-          <i className="fa-solid fa-venus-mars relative right-7 top-4 transform text-gray-500"></i>
+          <i className="fa-solid fa-envelope relative right-7 top-4 transform text-gray-500"></i>
         </div>
         <div className="flex justify-center">
           <Input
@@ -137,15 +125,15 @@ const Register = () => {
           />
           <i className="fa-solid fa-earth-americas relative right-7 top-4 transform text-gray-500"></i>
         </div>
-        <div className="lg:col-span-2 flex justify-center">
+        <div className="flex justify-center">
           <Input
-            type="email"
-            placeholder="correo"
-            value={email}
-            onChange={handleEmailChange}
+            type="text"
+            placeholder="Genero"
+            value={gender}
+            onChange={handleGeneroChange}
             required
           />
-          <i className="fa-solid fa-envelope relative right-7 top-4 transform text-gray-500"></i>
+          <i className="fa-solid fa-venus-mars relative right-7 top-4 transform text-gray-500"></i>
         </div>
         <div className="flex justify-center">
           <Input
@@ -166,6 +154,18 @@ const Register = () => {
             required
           />
           <i className="fa-solid fa-lock relative right-7 top-4 transform text-gray-500"></i>
+        </div>
+        <div className="lg:col-span-2 col-span-1 flex items-center lg:justify-between lg:px-6 gap-2">
+          <h1 className="font-semibold text-xl">Fecha de nacimiento:</h1>
+          <Input
+            id="fecha-nacimiento"
+            type="date"
+            placeholder="Fecha de nacimiento"
+            value={birthDate}
+            onChange={handleDateChange}
+            required
+            className="lg:w-56"
+          />
         </div>
         <div className="lg:flex lg:col-span-2 lg:justify-center flex justify-center">
           <Button

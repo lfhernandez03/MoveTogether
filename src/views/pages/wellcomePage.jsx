@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../global/elements/button";
 import Input from "../global/elements/inputs";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 // Componente de la página de bienvenida
 const WellcomePage = () => {
@@ -14,6 +15,7 @@ const WellcomePage = () => {
     setTimeout(() => {
       navigate("/wellcome/info");
     }, 1000);
+    console.log(localStorage.getItem("authToken"));
   };
 
   return (
@@ -82,22 +84,49 @@ const InitialInfoPage = () => {
     setSports(selectedOptions);
   };
 
+  // Subir la imagen a Cloudinary
+  const uploadImageToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "Preset_MoveTogether"); // Cambia esto si tu preset es diferente
+
+    try {
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dkzosj1gi/image/upload",
+        formData
+      );
+      return response.data.secure_url; // Retorna la URL de la imagen subida
+    } catch (error) {
+      console.error("Error al subir la imagen a Cloudinary", error);
+      toast.error("Error al subir la imagen");
+      throw error;
+    }
+  };
+
   const handleSubmit = async () => {
     const formData = new FormData();
-    if (username[0] != "@") {
-      return toast.error("El nombre de usuario no puede comenzar con '@'");
-    }
+    // if (username[0] != "@") {
+    //   return toast.error("El nombre de usuario no puede comenzar con '@'");
+    // }
     formData.append("username", username);
     formData.append("sports", JSON.stringify(sports)); // Convertir el array de deportes a JSON
     if (selectedFile) {
-      formData.append("profileImage", selectedFile); // Adjuntar la imagen de perfil
+      try {
+        const imageUrl = await uploadImageToCloudinary(selectedFile);
+        formData.append("avatar", imageUrl);
+      }catch (error) {
+        return;
+      }
     }
 
     console.log("Form data:", formData);
 
     try {
-      const response = await fetch("https:FALTAA", {
-        method: "POST",
+      const response = await fetch("https://move-together-back.vercel.app/api/actualizarPerfil", {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("authToken")}`,
+        },
         body: formData,
       });
 
