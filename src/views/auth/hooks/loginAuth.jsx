@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const useLogin = () => {
+
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -60,6 +64,7 @@ const useLogin = () => {
         if (data.success || response.ok) {
           setError("");
           toast.success("Bienvenido");
+          navigate("/home/feed");
         }
       }
     } catch (error) {

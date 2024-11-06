@@ -4,6 +4,7 @@ import NavHome from "../global/elements/navbarHome";
 import Feed from "../posts/components/feed";
 import { SideBarIz, SideBarDer } from "../sides/components/sideBars";
 import ComCard from "../communities/components/comCard";
+import Community from "../communities/components/community";
 
 const HomePage = () => {
   return (
@@ -18,7 +19,7 @@ const HomePage = () => {
         <div className="flex-grow flex justify-center items-start mt-6 p-4">
           <Routes>
             <Route path="/feed" element={<Feed />} />
-            <Route path="/community" element={<ComCard name="Los Correcaminos" created="RippioFood" sport="Running" members="420" img="/images/gatis.jpeg"/>} />
+            <Route path="/community" element={<Community/>} />
           </Routes>
         </div>
         <div className="sticky top-0 h-full">

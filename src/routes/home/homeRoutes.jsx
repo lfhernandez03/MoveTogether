@@ -6,8 +6,6 @@ const HomeRoutes = () => {
   return (
     <Routes>
         <Route path="/*" element={<HomePage />} />
-        
-        
     </Routes>
   )
 }

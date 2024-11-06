@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../global/elements/button";
 import { Span } from "../../global/elements/logo";
 import DropdownMenu from "../../global/elements/dropDownMenu";
@@ -6,6 +7,12 @@ import Friends from "./friends";
 import Communities from "./communities";
 
 const SideBarIz = () => {
+  const navigate = useNavigate();
+
+  const handleNavigateHome = () => {
+    navigate("/home/feed");
+  };
+
   return (
     <div className="hidden md:block md:w-45 md:h-full lg:w-80">
       <div className="flex flex-col h-full">
@@ -13,18 +20,25 @@ const SideBarIz = () => {
           <div className="flex md:hidden">
             <Span classname="" />
           </div>
-          <div className="font-bold text-xl flex justify-center">
-            <span className="text-green-400">
-              Move<span className="text-blue-400">Together</span>
-            </span>
+          <div onClick={handleNavigateHome} className="cursor-pointer">
+            <div className="font-bold text-xl flex justify-center">
+              <span className="text-green-400">
+                Move<span className="text-blue-400">Together</span>
+              </span>
+            </div>
           </div>
+
           <div className="w-full flex flex-col h-full pt-24">
             <ul className="w-full">
               <li className="hover:bg-gray-300 hover:rounded-md border-b-2 flex items-center">
                 <Button text="Amigos" classname="" href="/" />
               </li>
               <li className="hover:bg-gray-300 hover:rounded-md border-b-2 flex items-center">
-                <Button text="Comunidades" classname="" href="/posts" />
+                <Button
+                  text="Comunidades"
+                  classname=""
+                  navigateTo="/home/community"
+                />
               </li>
               <li className="hover:bg-gray-300 hover:rounded-md border-b-2 flex items-center">
                 <Button text="Rutas" classname="" href="/profile" />
