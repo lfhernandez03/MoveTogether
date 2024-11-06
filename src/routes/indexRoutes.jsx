@@ -19,8 +19,9 @@ const MainRoutes = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route path="/auth/*" element={<AuthRoutes />} />
-          <Route path="/home/*" element={<HomeRoutes />} />
+          <Route path="/home" element={<HomeRoutes />} />
           <Route path="/welcome" element={<WellcomePage />} />
+          <Route path="/welcome/info" element={<InitialInfoPage />} />
           <Route index element={<LoginPage />} />
         </Route>
       </Routes>

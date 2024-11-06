@@ -38,6 +38,7 @@ const VerificationAuth = () => {
         }
       );
       const data = await response.json();
+
       if (!response.ok) {
         let errorMessage =
           data.errores.msg || "Error en la verificacion";
@@ -45,11 +46,18 @@ const VerificationAuth = () => {
         toast.error(errorMessage);
         return;
       } else {
-        setStep(2); //Cuando la solicitud es exitosa, cambiamos el paso 
+        handleVerification(data);
       }
     } catch (error) {
-      setError("Error en la solicitud de cambio de contraseña");
+      setError("Error en la solicitud de verificacion de email");
     }
+  };
+
+  const handleVerification = (response) => {
+    const { token } = response;
+    localStorage.setItem("authToken", token);
+    console.log("Token almacenado en localStorage");
+    setStep(2);
   };
 
   const handleSubmitEmail = async (event) => {

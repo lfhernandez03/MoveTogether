@@ -1,26 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../global/elements/button";
+import Input from "../global/elements/inputs";
+import { toast } from "react-toastify";
+import axios from "axios";
 
+// Componente de la página de bienvenida
 const WellcomePage = () => {
+  const [fadeOut, setFadeOut] = useState(false);
+  const navigate = useNavigate();
+
+  const handleStart = () => {
+    setFadeOut(true);
+    setTimeout(() => {
+      navigate("/welcome/info");
+    }, 1000);
+    console.log(localStorage.getItem("authToken"));
+  };
+
   return (
-    <div className="w-screen h-screen flex">
-      <div className="flex justify-center items-center px-20">
-        <img src="/images/wellcome.png" alt="wellcome" className=" px-10 py-32 shadow-custom"/>
+    <div
+      className={`w-screen h-screen flex justify-center items-center ${
+        fadeOut ? "animate-fadeOut" : ""
+      }`}
+    >
+      <div className="lg:flex justify-center items-center px-20 hidden z-10">
+        <img
+          src="/images/wellcome.png"
+          alt="wellcome"
+          className="px-10 py-32 shadow-custom"
+        />
       </div>
-      <div className="flex-1 flex justify-center items-center flex-col gap-20 pr-20">
-        <h1 className="text-8xl">BIENVENIDO<span className="text-blue-700">!</span></h1>
-        <h1 className="text-2xl text-center px-24">Aquí no solo te conectarás con otros amantes del deporte, sino que también podrás compartir 
-            tus aventuras, descubrir rutas increíbles y encontrar todo lo que necesitas para mejorar tu 
-            rendimiento. Ya seas corredor, ciclista o simplemente alguien que disfruta mantenerse activo, 
-            ¡esta es tu comunidad! Nos encanta verte alcanzar tus metas, así que siéntete libre de explorar y 
-            disfrutar todo lo que tenemos para ti. </h1>
-        <Button navigateTo="/" text="Empecemos juntos!" className="bg-green-600 rounded-full text-xl "/>
+      <div className="absolute flex justify-center items-center">
+        <img
+          src="/images/Fondo.jpg"
+          alt="wellcome"
+          className="h-screen w-screen opacity-15"
+        />
+      </div>
+      <div className="lg:flex-1 flex flex-col justify-center items-center gap-20 lg:pr-20 px-20 z-10">
+        <h1 className="text-8xl">
+          BIENVENIDO<span className="text-blue-700">!</span>
+        </h1>
+        <h1 className="text-2xl text-center lg:px-24">
+          Aquí no solo te conectarás con otros amantes del deporte, sino que
+          también podrás compartir tus aventuras, descubrir rutas increíbles y
+          encontrar todo lo que necesitas para mejorar tu rendimiento. Ya seas
+          corredor, ciclista o simplemente alguien que disfruta mantenerse
+          activo, ¡esta es tu comunidad! Nos encanta verte alcanzar tus metas,
+          así que siéntete libre de explorar y disfrutar todo lo que tenemos
+          para ti.
+        </h1>
+        <Button
+          onClick={handleStart}
+          text="Empecemos juntos!"
+          className="bg-green-600 rounded-full text-xl hover:bg-green-800"
+        />
       </div>
     </div>
   );
-<<<<<<< Updated upstream
-}
-=======
 };
 
 // Página de información inicial
@@ -46,29 +84,56 @@ const InitialInfoPage = () => {
     setSports(selectedOptions);
   };
 
+  // Subir la imagen a Cloudinary
+  const uploadImageToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "Preset_MoveTogether"); // Cambia esto si tu preset es diferente
+
+    try {
+      const response = await axios.post(
+        "https://api.cloudinary.com/v1_1/dkzosj1gi/image/upload",
+        formData
+      );
+      return response.data.secure_url; // Retorna la URL de la imagen subida
+    } catch (error) {
+      console.error("Error al subir la imagen a Cloudinary", error);
+      toast.error("Error al subir la imagen");
+      throw error;
+    }
+  };
+
   const handleSubmit = async () => {
     const formData = new FormData();
-    if (username[0] != "@") {
-      return toast.error("El nombre de usuario no puede comenzar con '@'");
-    }
+    // if (username[0] != "@") {
+    //   return toast.error("El nombre de usuario no puede comenzar con '@'");
+    // }
     formData.append("username", username);
     formData.append("sports", JSON.stringify(sports)); // Convertir el array de deportes a JSON
     if (selectedFile) {
-      formData.append("profileImage", selectedFile); // Adjuntar la imagen de perfil
+      try {
+        const imageUrl = await uploadImageToCloudinary(selectedFile);
+        formData.append("avatar", imageUrl);
+      }catch (error) {
+        return;
+      }
     }
 
     console.log("Form data:", formData);
 
     try {
-      const response = await fetch("https:FALTAA", {
-        method: "POST",
+      const response = await fetch("https://move-together-back.vercel.app/api/actualizarPerfil", {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("authToken")}`,
+        },
         body: formData,
       });
 
       if (response.ok) {
         // Redirigir al usuario o mostrar un mensaje de éxito
         toast.success("Perfil creado correctamente");
-        navigate("/home/feed");
+        navigate("/home");
       } else {
         console.error("Error en la petición:", response.statusText);
       }
@@ -175,6 +240,4 @@ const InitialInfoPage = () => {
 };
 
 export { WellcomePage, InitialInfoPage };
->>>>>>> Stashed changes
 
-export default WellcomePage;
