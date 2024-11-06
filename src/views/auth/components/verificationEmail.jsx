@@ -57,7 +57,7 @@ const VerificationEmail = ({ onClose }) => {
               <Button
                 text="Cerrar"
                 onClick={onClose}
-                navigateTo="/wellcome"
+                navigateTo="/welcome"
                 className="bg-green-500 text-white rounded-md"
               />
             </div>
