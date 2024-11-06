@@ -16,7 +16,7 @@ const DropdownMenu = ({ options, onSelect }) => {
 
   return (
     <div className="relative inline-block text-left">
-      <button onClick={toggleMenu} className="focus:outline-none">
+      <button onClick={toggleMenu} className="focus:outline-none flex rounded-full hover:bg-slate-100 p-2 active:bg-slate-200 ">
         <i className="fa-solid fa-ellipsis"></i>
       </button>
       {isOpen && (

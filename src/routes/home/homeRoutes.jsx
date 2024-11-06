@@ -5,7 +5,7 @@ import HomePage from '../../views/pages/homePage'
 const HomeRoutes = () => {
   return (
     <Routes>
-        <Route path="home" element={<HomePage />} />
+        <Route path="/*" element={<HomePage />} />
         
         
     </Routes>

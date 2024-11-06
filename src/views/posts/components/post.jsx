@@ -1,22 +1,34 @@
 import React from "react";
-import {UserPost, UserComment } from "../../global/elements/userPost";
+import { UserPost, UserComment } from "../../global/elements/userPost";
 import Button from "../../global/elements/button";
 import PostComment from "./postComment";
-
-
+import DropDownMenu from "../../global/elements/dropDownMenu";
 
 const Post = () => {
+
+  const handleSelect = (option) => {
+    setActiveComponent(option.value);
+  };
+
+  const options = [
+    {
+      label: "Editar",
+      value: "edit",
+    },
+    {
+      label: "Eliminar",
+      value: "delete",
+    },
+  ];
+
   return (
     <div className="block w-full max-w-lg border h-auto border-green-300 bg-white p-4 rounded-3xl md:max-w-xl md:h-auto ">
       <div className="flex w-full justify-between">
         <div className="">
           <UserPost valueUser="lucho" valueUserName="@lucho" />
         </div>
-        <div>
-          <Button
-            icon="fa-solid fa-ellipsis"
-            className="hover:bg-slate-100 rounded-full"
-          />
+        <div className="">
+          <DropDownMenu options={options} onSelect={handleSelect}/>
         </div>
       </div>
       <div className="pt-2 pb-4">
@@ -27,7 +39,7 @@ const Post = () => {
       </div>
       <div className="h-44 border border-blue-200 rounded-t-2xl ">
         <img
-          src="images/gatis.jpeg"
+          src="/images/gatis.jpeg"
           alt="imagen"
           className="w-full h-full object-contain"
         />
@@ -58,8 +70,11 @@ const Post = () => {
       </div>
       <div className="">
         <div className="flex w-full pt-2 ">
-          <UserComment valueUser="Lucho Durazno" valueComment="Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua."/>
+          <UserComment
+            valueUser="Lucho Durazno"
+            valueComment="Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua."
+          />
         </div>
       </div>
       <div className="pt-4">
