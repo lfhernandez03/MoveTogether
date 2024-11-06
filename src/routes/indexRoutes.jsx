@@ -5,6 +5,7 @@ import MainLayout from "../views/layouts/mainLayout";
 import LoginPage from "../views/pages/loginPage";
 import HomePage from "../views/pages/homePage";
 import WellcomePage from "../views/pages/wellcomePage";
+import HomeRoutes from "./home/homeRoutes";
 
 const MainRoutes = () => {
   return (
@@ -12,7 +13,7 @@ const MainRoutes = () => {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route path="/auth/*" element={<AuthRoutes />} />
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/home/*" element={<HomeRoutes />} />
           <Route path="/welcome" element={<WellcomePage />} />
           <Route index element={<LoginPage />} />
         </Route>
