@@ -1,8 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
+
 import Input from "../../global/elements/inputs";
 import Button from "../../global/elements/button";
+import ComCard from "./comCard";
+import Post from "../../posts/components/post";
 
 const Community = () => {
+  const [selectedTab, setSelectedTab] = useState("feed");
+
+  const handleTabChange = (tab) => {
+    setSelectedTab(tab);
+  };
+
   return (
     <div className="flex flex-col items-center justify-center border-b-2 pb-6">
       <div className="pb-6">
@@ -28,8 +37,34 @@ const Community = () => {
           <Button icon="fa-solid fa-plus" />
         </div>
       </div>
+      <div className="flex justify-center items-center mt-6">
+        <Button
+          text="Feed"
+          className={`mr-4 ${selectedTab === "feed" ? "border-b border-b-green-400 text-black" : "bg-white"}`}
+          onClick={() => handleTabChange("feed")}
+        />
+        <span className="border-l border-gray-300 h-6 mx-4"></span>
+        <Button
+          text="Descubrir"
+          className={`${selectedTab === "descubrir" ? "border-b border-b-green-400 text-black" : "bg-white"}`}
+          onClick={() => handleTabChange("descubrir")}
+        />
+      </div>
+      <div className="pt-6">
+        {selectedTab === "feed" && (
+          <div>
+            <h2 className="text-xl font-semibold">Feed</h2>
+            <Post />
+          </div>
+        )}
+        {selectedTab === "descubrir" && (
+          <div>
+            <h2 className="text-xl font-semibold">Descubrir</h2>
+            <ComCard />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
-
 export default Community;
