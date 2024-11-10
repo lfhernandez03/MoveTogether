@@ -14,13 +14,17 @@ const Friends = () => {
           <span className="text-lg select-none">Conectados</span>
         </div>
         <div className="flex flex-col gap-4 max-h-60 overflow-y-auto">
-          {friends.slice(0, 5).map((friend, index) => (
-            <UserAvatar
-              key={index}
-              avatar={friend.avatar}
-              fullname={friend.fullname}
-            />
-          ))}
+          {friends
+            .filter((friend) => friend.isLoggedIn)
+            .slice(0, 5)
+            .map((friend, index) => (
+              <UserAvatar
+                key={index}
+                avatar={friend.avatar}
+                fullname={friend.fullname}
+                isLoggedIn={friend.isLoggedIn}
+              />
+            ))}
         </div>
       </div>
       <div className="py-4">

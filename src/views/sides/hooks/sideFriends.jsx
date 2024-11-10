@@ -5,13 +5,20 @@ const sideFriends = () => {
   const [friends, setFriends] = useState([]);
 
   const handleSideFriends = async () => {
+    
+    const token = localStorage.getItem("authToken"); // Asegúrate de obtener el token aquí
+    if (!token) {
+      console.log("No se pudo obtener el token de autenticación");
+      return;
+    }
     try {
       const response = await fetch(
-        "https://move-together-back.vercel.app/api/listar/amigos?email=linamunoz438@gmail.com",
+        `https://move-together-back.vercel.app/api/listar/amigos`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
         }
       );
