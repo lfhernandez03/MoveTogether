@@ -104,41 +104,52 @@ const InitialInfoPage = () => {
   };
 
   const handleSubmit = async () => {
-    const formData = new FormData();
-    // if (username[0] != "@") {
-    //   return toast.error("El nombre de usuario no puede comenzar con '@'");
-    // }
-    formData.append("username", username);
-    formData.append("sports", JSON.stringify(sports)); // Convertir el array de deportes a JSON
+    let imageUrl = null; // Definir una variable para la URL de la imagen
+
+    if (username.length < 6) {
+      return toast.error("El nombre de usuario no puede tener menos de 6 caracteres");
+    }
+
+    // Si hay un archivo seleccionado, subirlo a Cloudinary
     if (selectedFile) {
       try {
-        const imageUrl = await uploadImageToCloudinary(selectedFile);
-        formData.append("avatar", imageUrl);
-      }catch (error) {
-        return;
+        imageUrl = await uploadImageToCloudinary(selectedFile); // Esperar a que la imagen se suba y obtener la URL
+      } catch (error) {
+        console.error("Error al subir la imagen:", error);
+        return; // Detener el proceso si hay un error al subir la imagen
       }
     }
 
-    console.log("Form data:", formData);
+    // Crear el payload con los datos que quieres enviar
+    const payload = {
+      username, // El username que el usuario ingresó
+      sports,   // Los deportes seleccionados
+      avatar: imageUrl, // La URL de la imagen subida (o null si no hay imagen)
+    };
 
     try {
+      // Realizar la solicitud al backend enviando el payload como JSON
       const response = await fetch("https://move-together-back.vercel.app/api/actualizarPerfil", {
         method: "PUT",
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("authToken")}`,
+          "Content-Type": "application/json", // Indicamos que el cuerpo de la solicitud es JSON
+          "Authorization": `Bearer ${localStorage.getItem("authToken")}`, // Token de autenticación
         },
-        body: formData,
+        body: JSON.stringify(payload), // Convertir el objeto payload a JSON antes de enviarlo
       });
 
+      console.log("Enviando JSON:", JSON.stringify(payload)); // Para depuración
+
       if (response.ok) {
-        // Redirigir al usuario o mostrar un mensaje de éxito
         toast.success("Perfil creado correctamente");
-        navigate("/home");
+        navigate("/home"); // Redirigir al usuario a la página principal
       } else {
         console.error("Error en la petición:", response.statusText);
+        toast.error("Hubo un error al crear el perfil.");
       }
     } catch (error) {
       console.error("Error en el fetch:", error);
+      toast.error("Error de conexión. Inténtalo más tarde.");
     }
   };
 
@@ -222,7 +233,7 @@ const InitialInfoPage = () => {
 
         <div className="flex justify-center items-center m-4">
           <Button
-            onClick={handleSubmit} // Llamar a handleSubmit al hacer clic en "Guardar"
+            onClick={handleSubmit}
             text="Guardar"
             className="bg-blue-600 rounded-full text-xl hover:bg-blue-400"
           />
@@ -231,8 +242,8 @@ const InitialInfoPage = () => {
       <div className="hidden lg:flex justify-center items-center">
         <img
           src="/images/InitialInfo.png"
-          alt="Info"
-          className="border px-10 py-32 shadow-custom"
+          alt="wellcome"
+          className="h-5/6 object-cover"
         />
       </div>
     </div>
@@ -240,4 +251,5 @@ const InitialInfoPage = () => {
 };
 
 export { WellcomePage, InitialInfoPage };
+
 
