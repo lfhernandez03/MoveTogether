@@ -5,6 +5,7 @@ import MainLayout from "../views/layouts/mainLayout";
 import LoginPage from "../views/pages/loginPage";
 import HomeRoutes from "./home/homeRoutes";
 import HomePage from "../views/pages/homePage";
+import UserProfile from "../views/sides/components/profile";
 import { WellcomePage, InitialInfoPage } from "../views/pages/wellcomePage";
 
 const MainRoutes = () => {
@@ -16,6 +17,7 @@ const MainRoutes = () => {
           <Route path="/home/*" element={<HomeRoutes />} />
           <Route path="/welcome" element={<WellcomePage />} />
           <Route path="/welcome/info" element={<InitialInfoPage />} />
+          <Route path="profile" element={<UserProfile />} />
           <Route index element={<LoginPage />} />
         </Route>
       </Routes>

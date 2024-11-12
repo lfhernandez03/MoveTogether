@@ -64,7 +64,7 @@ const NavHome = () => {
                     <div className="absolute right-4 top-16 p-4 w-56 bg-white border border-gray-200 rounded-md shadow-lg">
                         <h1>A donde quieres ir?</h1>
                         <CardOption navigateTo="/" icon="fa-house" label="Home" className="w-44"/>
-                        <CardOption navigateTo="/" icon="fa-user" label="Perfil" className="w-44"/>
+                        <CardOption navigateTo="/home/profile" icon="fa-user" label="Perfil" className="w-44"/>
                         <CardOption navigateTo="/" icon="fa-user-group" label="Amigos" className="w-44"/>
                         <CardOption navigateTo="/" icon="fa-people-group" label="Comunidades" className="w-44"/>
                         <CardOption navigateTo="/" icon="fa-map" label="Rutas" className="w-44"/>
@@ -97,7 +97,7 @@ const NavHome = () => {
         <NavigateH navigateTo="/" bgColor="white" icon="fa-house"/>
         <NavigateH navigateTo="/" bgColor="white" icon="fa-map"/>
         <NavigateH navigateTo="/" bgColor="white" icon="fa-award"/>
-        <NavigateH navigateTo="/" bgColor="white" icon="fa-user"/>
+        <NavigateH navigateTo="/home/profile" bgColor="white" icon="fa-user"/>
       </div>
       <div className="pr-8 hidden md:flex gap-4">
         <NavigateH navigateTo="/" bgColor="white" icon="fa-bell"/>

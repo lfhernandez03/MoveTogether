@@ -5,6 +5,7 @@ import Feed from "../posts/components/feed";
 import { SideBarIz, SideBarDer } from "../sides/components/sideBars";
 import ComCard from "../communities/components/comCard";
 import Community from "../communities/components/community";
+import UserProfile from "../sides/components/profile";
 
 const HomePage = () => {
   return (
@@ -20,6 +21,7 @@ const HomePage = () => {
           <Routes>
             <Route path="/feed" element={<Feed />} />
             <Route path="/community" element={<Community/>} />
+            <Route path="/profile" element={<UserProfile />} />
           </Routes>
         </div>
         <div className="sticky top-0 h-full">

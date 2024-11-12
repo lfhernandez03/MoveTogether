@@ -4,6 +4,7 @@ import LoginPage from "../../views/pages/loginPage";
 import RegisterPage from "../../views/pages/registerPage";
 import ChangePassPage from "../../views/pages/changePassPage";
 import VerificationEmail from "../../views/pages/verificationEmailPage";
+import UserProfile from "../../views/sides/components/profile";
 
 const AuthRoutes = () => {
   return (
