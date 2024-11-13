@@ -15,13 +15,17 @@ const Friends = () => {
         </div>
         <div className="flex flex-col gap-4 max-h-60 overflow-y-auto">
           {friends.length > 0 ? (
-            friends.slice(0, 5).map((friend, index) => (
-            <UserAvatar
-              key={index}
-              avatar={friend.avatar}
-              fullname={friend.fullname}
-            />
-          ))): (
+            friends
+            .filter((friend) => friend.isLoggedIn)
+            .slice(0, 5)
+            .map((friend, index) => (
+              <UserAvatar
+                key={index}
+                avatar={friend.avatar}
+                fullname={friend.fullname}
+                isLoggedIn={friend.isLoggedIn}
+              />
+            ))): (
             <p className="text-center text-gray-400"> Parece que aun no tienes amix :( </p>
           )}
         </div>
