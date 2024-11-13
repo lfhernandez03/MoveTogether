@@ -4,7 +4,7 @@ import Button from "../../global/elements/button";
 import PostComment from "./postComment";
 import DropDownMenu from "../../global/elements/dropDownMenu";
 
-const Post = () => {
+const Post = ({ valueUser, valueUserName, valueComment }) => {
 
   const handleSelect = (option) => {
     setActiveComponent(option.value);
@@ -25,61 +25,31 @@ const Post = () => {
     <div className="block w-full max-w-lg border h-auto border-green-300 bg-white p-4 rounded-3xl md:max-w-xl md:h-auto ">
       <div className="flex w-full justify-between">
         <div className="">
-          <UserPost valueUser="lucho" valueUserName="@lucho" />
+          <UserPost valueUser={valueUser} valueUserName={valueUserName} />
         </div>
         <div className="">
           <DropDownMenu options={options} onSelect={handleSelect}/>
         </div>
       </div>
-      <div className="pt-2 pb-4">
-        <p className="text-justify text-md">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.
-        </p>
+      <div>
+        <p className="text-justify">{valueComment}</p>
       </div>
-      <div className="h-44 border border-blue-200 rounded-t-2xl ">
-        <img
-          src="/images/gatis.jpeg"
-          alt="imagen"
-          className="w-full h-full object-contain"
-        />
+      <div className="h-44">
+        <img src="images/gatis.jpeg" alt="imagen" className="w-full h-full rounded-3xl object-contain" />
       </div>
-      <div className="pt-2">
+      <div className="pt-4">
         <span className="block w-full border-t border-gray-300"></span>
       </div>
       <div className="flex w-full justify-between">
-        <div className="flex gap-6 justify-center items-center">
-          <div className="flex items-center gap-2">
-            <Button
-              icon="fa-solid fa-heart"
-              className="flex hover:bg-red-300 rounded-full bg-red-200"
-            />
-            <span className="text-sm font-semibold">0</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              icon="fa-solid fa-comment"
-              className="hover:bg-green-300 rounded-full bg-green-200"
-            />
-            <span className="text-sm font-semibold">0</span>
-          </div>
+        <div className="flex gap-2 justify-center items-center">
+          <Button icon="fa-solid fa-heart" text="Me gusta" className="flex hover:bg-red-200 rounded-full bg-white" />
+          <Button icon="fa-solid fa-comment" text="Comentar" className="hover:bg-blue-200 rounded-full bg-white" />
         </div>
       </div>
-      <div className="">
+      <div>
         <span className="block w-full border-t border-gray-300"></span>
       </div>
-      <div className="">
-        <div className="flex w-full pt-2 ">
-          <UserComment
-            valueUser="Lucho Durazno"
-            valueComment="Lorem ipsum dolor sit amet consectetur adipisicing elit sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua."
-          />
-        </div>
-      </div>
-      <div className="pt-4">
-        <PostComment />
-      </div>
+      <PostComment />
     </div>
   );
 };

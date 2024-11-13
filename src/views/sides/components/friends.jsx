@@ -14,13 +14,16 @@ const Friends = () => {
           <span className="text-lg select-none">Conectados</span>
         </div>
         <div className="flex flex-col gap-4 max-h-60 overflow-y-auto">
-          {friends.slice(0, 5).map((friend, index) => (
+          {friends.length > 0 ? (
+            friends.slice(0, 5).map((friend, index) => (
             <UserAvatar
               key={index}
               avatar={friend.avatar}
               fullname={friend.fullname}
             />
-          ))}
+          ))): (
+            <p className="text-center text-gray-400"> Parece que aun no tienes amix :( </p>
+          )}
         </div>
       </div>
       <div className="py-4">
