@@ -1,35 +1,12 @@
-import React, { useState } from "react";
-import NavHome from "../global/elements/navbarHome";
-import { SideBarIz, SideBarDerChat } from "../sides/components/sideBars";
+import React from "react";
 import ChatMessages from "../contacts/components/chatMessages";
 
-const ChatPage = () => {
-  const [selectedFriend, setSelectedFriend] = useState(null);
-  const [selectedConversation, setSelectedConversation] = useState(null);
-
-  const handleSelectConversation = (conversation) => {
-    if (conversation && conversation.friend) {
-      setSelectedConversation(conversation);
-      setSelectedFriend(conversation.friend);
-    } else {
-      console.warn("La conversación no tiene un amigo asociado.");
-    }
-  };
-
+const ChatPage = ({ selectedFriend, selectedConversation, onSelectConversation }) => {
   return (
-    <div className="w-full h-screen flex flex-col">
-      <header className="select-none sticky top-0 z-10">
-        <NavHome />
-      </header>
-
-      <main className="flex-grow flex select-none h-full">
-        {/* Barra lateral izquierda */}
-        <aside className="sticky top-0 h-full">
-          <SideBarIz onSelectFriend={setSelectedFriend} />
-        </aside>
-
+    <div className="block w-full max-w-lg border h-auto border-green-300 bg-white p-4 rounded-3xl md:max-w-xl md:h-auto ">
+      <main className="flex-grow flex select-none h-4/6 max-w-3xl w-full">
         {/* Sección principal del chat */}
-        <section className="flex-grow flex flex-col justify-between p-4">
+        <section className="flex-grow flex flex-col justify-between p-4 bg-white shadow-lg rounded-lg">
           <div className="flex-grow flex flex-col h-full">
             <ChatMessages 
               selectedFriend={selectedFriend} 
@@ -37,14 +14,6 @@ const ChatPage = () => {
             />
           </div>
         </section>
-
-        {/* Barra lateral derecha */}
-        <aside className="sticky top-0 h-full">
-          <SideBarDerChat
-            onSelectFriend={setSelectedFriend}
-            onSelectConversation={handleSelectConversation}
-          />
-        </aside>
       </main>
     </div>
   );

@@ -15,7 +15,7 @@ const ChatHistory = ({ messages, currentUserId }) => {
   return (
     <div
       ref={chatContainerRef}
-      className="flex-1 p-4 overflow-y-auto break-words max-h-[60vh] border rounded-lg bg-white"
+      className="flex-1 p-4 overflow-y-auto break-words max-h-[60vh] border rounded-lg bg-white border-green-300 shadow-lg"
     >
       {messages.length > 0 ? (
         messages.map((msg, index) => (
