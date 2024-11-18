@@ -4,16 +4,22 @@ import { io } from "socket.io-client";
 const useChat = (friend, setFriends) => {
   const [messages, setMessages] = useState([]);
   const [currentConversation, setCurrentConversation] = useState(null);
-  const [currentUserId] = useState("672431e30f1ec66e8c107c89");
+  const [currentUserId, setCurrentUserId] = useState(null); // Guardar el currentUserId aquí
   const socketRef = useRef(null);
 
   useEffect(() => {
-    if (!socketRef.current) {
-      // Inicializar socket solo una vez
-      socketRef.current = io("http://localhost:5000", { withCredentials: true });
+    const token = localStorage.getItem("authToken");
+
+    if (token && !socketRef.current) {
+      socketRef.current = io("http://localhost:5000", {
+        withCredentials: true,
+        auth: { token },
+      });
+      console.log("Socket conectado:", socketRef.current.id);
+    } else if (!token) {
+      console.warn("No se puede conectar el socket: Falta el token de autenticación.");
     }
 
-    // Función para manejar eventos de recepción de mensajes
     const handleReceiveMessage = (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
       setFriends((prevFriends) =>
@@ -23,15 +29,18 @@ const useChat = (friend, setFriends) => {
       );
     };
 
-    if (friend) {
-      setMessages([]); // Limpiar mensajes anteriores al cambiar de amigo
-      socketRef.current.emit("joinConversation", friend._id, currentUserId);
+    if (friend && token) {
+      setMessages([]); // Limpiar mensajes al cambiar de amigo
+      console.log("Uniéndose a la conversación con:", friend._id);
+      socketRef.current.emit("joinConversation", friend._id);
 
       socketRef.current.on("conversationJoined", ({ conversationId }) => {
         setCurrentConversation(conversationId);
+        console.log("Conversación actualizada:", conversationId);
       });
 
       socketRef.current.on("previousMessages", (previousMessages) => {
+        console.log("Mensajes previos recibidos:", previousMessages);
         setMessages(previousMessages);
       });
 
@@ -39,31 +48,62 @@ const useChat = (friend, setFriends) => {
     }
 
     return () => {
-      // Limpiar eventos y desconectar el socket solo si cambia `friend`
       if (socketRef.current) {
-        socketRef.current.off("receiveMessage", handleReceiveMessage);
+        console.log("Desconectando socket:", socketRef.current.id);
         socketRef.current.disconnect();
         socketRef.current = null;
       }
     };
-  }, [friend, currentUserId, setFriends]);
+  }, [friend, setFriends]);
 
-  const sendMessage = (text) => {
-    if (!currentConversation) return;
+  // Función para obtener el currentUserId desde el backend
+  const fetchCurrentUserId = async (token) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/buscarPerfil", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token }),
+      });
+
+      const data = await response.json();
+      if (data && data.userId) {
+        setCurrentUserId(data.userId);
+      } else {
+        console.error("No se pudo obtener el currentUserId");
+      }
+    } catch (error) {
+      console.error("Error al obtener el currentUserId:", error);
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      fetchCurrentUserId(token); // Obtener el currentUserId cuando se cargue el token
+    }
+  }, []);
+
+  const sendMessage = (messageContent) => {
+    if (!currentConversation || !currentUserId) return;
 
     const message = {
-      sender: currentUserId,
+      sender: currentUserId, // Usar el currentUserId que fue establecido desde el backend
       recipient: friend._id,
-      content: text,
+      content: messageContent,
       type: "text",
       timestamp: new Date(),
     };
 
+    // Emitir el mensaje al servidor
     socketRef.current.emit("sendMessage", { conversationId: currentConversation, message });
+
+    // Actualizar el estado localmente para agregar el nuevo mensaje
     setMessages((prevMessages) => [...prevMessages, message]);
   };
 
-  return { messages, sendMessage, currentUserId };
+  return { messages, currentConversation, sendMessage };
 };
 
 export default useChat;
