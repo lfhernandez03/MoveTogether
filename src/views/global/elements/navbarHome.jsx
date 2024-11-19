@@ -49,7 +49,7 @@ const NavHome = () => {
             <span className={`flex-shrink-0`}>
               <img
                 src="/images/movetogether.png"
-                className="flex w-10 h-10 sm:flex sm:w-20 sm:h-20 md:w-16 md:h-16 lg:flex lg:w-16 lg:h-16 xl:flex xl:w-16 xl:h-16"
+                className="flex w-10 h-10 sm:flex sm:w-10 sm:h-10 md:w-16 md:h-16 lg:flex lg:w-16 lg:h-16 xl:flex xl:w-16 xl:h-16"
               />
             </span>
             <Input type="text" placeholder="Buscar" className="w-56 h-8 rounded-3xl"/>

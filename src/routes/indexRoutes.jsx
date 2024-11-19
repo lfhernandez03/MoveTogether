@@ -8,6 +8,7 @@ import HomePage from "../views/pages/homePage";
 import UserProfile from "../views/sides/components/profile";
 import { WellcomePage, InitialInfoPage } from "../views/pages/wellcomePage";
 import ChatPage from "../views/pages/chatPage";
+import PostProfile from "../views/posts/components/postProfile";
 
 const MainRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const MainRoutes = () => {
           <Route path="profile" element={<UserProfile />} />
           <Route index element={<LoginPage />} />
           <Route path="/chat" element={<ChatPage />} />
+          <Route path="/postprofile" element={<PostProfile />} />
         </Route>
       </Routes>
     </Router>
