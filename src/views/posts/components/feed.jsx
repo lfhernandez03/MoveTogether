@@ -1,6 +1,6 @@
 import React from "react";
 import MakePost from "./makePost";
-import Post from "./post";
+import PostsAPI from "../hooks/postsAPI";
 
 const Feed = () => {
   return (
@@ -10,7 +10,7 @@ const Feed = () => {
           <MakePost />
         </div>
         <div className="flex w-full items-center justify-center pb-6">
-          <Post />
+          <PostsAPI />
         </div>
       </div>
     </div>

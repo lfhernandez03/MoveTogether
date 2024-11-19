@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import jwt_decode from "jwt-decode";
-import Post from "./post";
+import Post from "../../posts/components/post";
 
 const PostsAPI = () => {
   const [posts, setPosts] = useState([]);
@@ -15,10 +14,21 @@ const PostsAPI = () => {
         console.log("No se encontró el token");
         return;
       }
-
-      const decodedToken = jwt_decode(token);
-      const userId = decodedToken.id; // Asegúrate de que el token contenga el userId
-
+  
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+  
+      const decodedToken = JSON.parse(jsonPayload);
+      const userId = decodedToken.userId;
+  
+      if (!userId) {
+        console.log("No se encontró el userId en el token");
+        return;
+      }
+  
       const response = await fetch(
         `https://move-together-back.vercel.app/api/posts/feed/:${userId}`,
         {
@@ -34,17 +44,14 @@ const PostsAPI = () => {
       if (response.ok) {
         if (data.message) {
           setMessage(data.message);
-          setPosts([]);
         } else {
-          setPosts(data);
-          setMessage("");
+          setPosts(data.posts);
         }
       } else {
-        setMessage(data.message || "Error al obtener el feed");
+        console.log("Error al obtener los posts");
       }
     } catch (error) {
-      console.log(error);
-      setMessage("Error al obtener el feed");
+      console.error("Error al manejar los posts del feed:", error);
     }
   };
 
