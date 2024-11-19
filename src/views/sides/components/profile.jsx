@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import PostProfile from '../../posts/components/postProfile';
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
@@ -51,13 +52,24 @@ const UserProfile = () => {
   }
 
   return (
-    <div>
-      <h1>Perfil de Usuario</h1>
-      <p>Nombre: {userData.fullname}</p>
-      <p>Email: {userData.email || 'No disponible'}</p>
-      <p>Deportes: {userData.sports?.join(', ') || 'No disponibles'}</p>
+    <div className="flex-1 mx-auto p-4 justify-center max-w-xl">
+      <div className="flex-col max-w-lg items-center space-y-4 m-10 bg-white shadow-custom rounded-xl inline-flex px-20 py-10">
+        <img
+          src={userData.avatar || 'https://via.placeholder.com/150'}  // Imagen predeterminada si no hay avatar
+          alt="Avatar"
+          className="flex w-72 h-72 rounded-full object-cover border-4 border-gray-200"
+        />
+        <div className="space-y-2 text-center text-2xl">
+          <p><span className="font-bold">Nombre:</span> {userData.fullname}</p>
+          <p><span className="font-bold">Username:</span> {userData.username}</p>
+          <p><span className="font-bold">Deportes:</span> {userData.sports?.join(', ') || 'No disponibles'}</p>
+        </div>
+      </div>
+      <div className='flex justify-center'>
+        <PostProfile />
+      </div>
     </div>
-  );
+  );  
 };
 
 export default UserProfile;
