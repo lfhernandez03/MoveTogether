@@ -1,10 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { io } from "socket.io-client";
+import axios from "axios";
 
 const useChat = (friend, setFriends) => {
   const [messages, setMessages] = useState([]);
   const [currentConversation, setCurrentConversation] = useState(null);
-  const [currentUserId, setCurrentUserId] = useState(null); // Guardar el currentUserId aquí
+  const [currentUserId, setCurrentUserId] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [friendData, setFriendData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const socketRef = useRef(null);
 
   useEffect(() => {
@@ -22,11 +27,6 @@ const useChat = (friend, setFriends) => {
 
     const handleReceiveMessage = (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
-      setFriends((prevFriends) =>
-        prevFriends.map((f) =>
-          f._id === friend._id ? { ...f, unreadCount: (f.unreadCount || 0) + 1 } : f
-        )
-      );
     };
 
     if (friend && token) {
@@ -35,9 +35,13 @@ const useChat = (friend, setFriends) => {
       socketRef.current.emit("joinConversation", friend._id);
 
       socketRef.current.on("conversationJoined", ({ conversationId }) => {
+        if (conversationId) {
         setCurrentConversation(conversationId);
         console.log("Conversación actualizada:", conversationId);
-      });
+      } else { 
+        console.error("No se pudo unir a la conversación");
+      }
+    });
 
       socketRef.current.on("previousMessages", (previousMessages) => {
         console.log("Mensajes previos recibidos:", previousMessages);
@@ -56,54 +60,74 @@ const useChat = (friend, setFriends) => {
     };
   }, [friend, setFriends]);
 
-  // Función para obtener el currentUserId desde el backend
   const fetchCurrentUserId = async (token) => {
+    if (!token) {
+      setError('No token found');
+      setLoading(false);
+      return;
+    }
+
     try {
-      const response = await fetch("http://localhost:5000/api/buscarPerfil", {
-        method: "POST",
+      const response = await axios.get('https://move-together-back.vercel.app/api/buscarPerfil', {
         headers: {
-          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify({ token }),
       });
 
-      const data = await response.json();
-      if (data && data.userId) {
-        setCurrentUserId(data.userId);
+      if (response.data) {
+          console.log('Datos del usuario:', response.data);
+          setUserData(response.data);
+          setCurrentUserId(response.data._id);
       } else {
         console.error("No se pudo obtener el currentUserId");
+        setError('No data found');
       }
     } catch (error) {
-      console.error("Error al obtener el currentUserId:", error);
+      console.error('Error al obtener el currentUserId:', error);
+      setError('Error fetching data');
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
-      fetchCurrentUserId(token); // Obtener el currentUserId cuando se cargue el token
+      fetchCurrentUserId(token);
     }
   }, []);
 
+  useEffect(() => {
+    if (currentUserId) {
+      console.log('currentUserId:', currentUserId); // Verifica que esto se esté llamando
+    }
+  }, [currentUserId]);
+
   const sendMessage = (messageContent) => {
-    if (!currentConversation || !currentUserId) return;
+    if (!currentConversation || !currentUserId){
+      console.error("No se puede enviar el mensaje: Falta la conversación o el usuario actual.");
+      return;
+    }
 
     const message = {
-      sender: currentUserId, // Usar el currentUserId que fue establecido desde el backend
+      sender: currentUserId,
       recipient: friend._id,
       content: messageContent,
       type: "text",
       timestamp: new Date(),
     };
 
-    // Emitir el mensaje al servidor
+    console.log("Datos enviaods:", {conversationId: currentConversation, message});
+
     socketRef.current.emit("sendMessage", { conversationId: currentConversation, message });
 
-    // Actualizar el estado localmente para agregar el nuevo mensaje
-    setMessages((prevMessages) => [...prevMessages, message]);
-  };
+    // Escuchar confirmación del servidor antes de actualizar estado local
+  socketRef.current.once("messageSent", (serverMessage) => {
+    setMessages((prevMessages) => [...prevMessages, serverMessage]);
+  });
+}
 
-  return { messages, currentConversation, sendMessage };
+  return { messages, currentConversation, sendMessage, currentUserId };
 };
 
 export default useChat;

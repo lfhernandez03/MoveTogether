@@ -29,7 +29,9 @@ const ChatHistory = ({ messages, currentUserId }) => {
 };
 
 const MessageBubble = ({ msg, currentUserId }) => {
-  const isSender = msg.sender._id === currentUserId;
+  // Comparar correctamente dependiendo del formato del campo `sender`
+  const isSender =
+    (msg.sender._id || msg.sender) === currentUserId;
 
   return (
     <div className={`flex ${isSender ? "justify-end" : "justify-start"} mb-2`}>

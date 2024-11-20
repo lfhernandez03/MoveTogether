@@ -5,7 +5,6 @@ const sideFriends = () => {
   const [friends, setFriends] = useState([]);
 
   const handleSideFriends = async () => {
-
     
     const token = localStorage.getItem("authToken"); // Asegúrate de obtener el token aquí
     if (!token) {
@@ -13,13 +12,6 @@ const sideFriends = () => {
       return;
     }
     try {
-
-      const email = localStorage.getItem("email"); // Obtener el correo del almacenamiento local
-      if (!email) {
-        console.log("No se encontró el correo del usuario");
-        return;
-      }
-
       const response = await fetch(
         `https://move-together-back.vercel.app/api/listar/amigos`,
         {
