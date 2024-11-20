@@ -16,7 +16,7 @@ const useChat = (friend, setFriends) => {
     const token = localStorage.getItem("authToken");
 
     if (token && !socketRef.current) {
-      socketRef.current = io("https://move-together-back.vercel.app", {
+      socketRef.current = io("http://localhost:5000", {
         withCredentials: true,
         auth: { token },
       });
