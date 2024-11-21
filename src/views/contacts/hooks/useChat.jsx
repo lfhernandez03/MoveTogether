@@ -16,16 +16,25 @@ const useChat = (friend, setFriends) => {
     const token = localStorage.getItem("authToken");
 
     if (token && !socketRef.current) {
-      socketRef.current = io("http://localhost:5000", {
+       //socketRef.current = io("https://move-together-back.vercel.app"
+      socketRef.current = io("http://localhost:5000"
+      , {
         withCredentials: true,
         auth: { token },
       });
-      console.log("Socket conectado:", socketRef.current.id);
+      socketRef.current.on("connect", () => {
+        console.log("Socket conectado:", socketRef.current.id);
+      });
+
+      socketRef.current.on("connect_error", (err) => {
+        console.error("Error de conexión del socket:", err.message);
+      });
     } else if (!token) {
       console.warn("No se puede conectar el socket: Falta el token de autenticación.");
     }
 
     const handleReceiveMessage = (message) => {
+      //console.log("Mensaje recibido:", message);
       setMessages((prevMessages) => [...prevMessages, message]);
     };
 
@@ -44,7 +53,7 @@ const useChat = (friend, setFriends) => {
     });
 
       socketRef.current.on("previousMessages", (previousMessages) => {
-        console.log("Mensajes previos recibidos:", previousMessages);
+        //console.log("Mensajes previos recibidos:", previousMessages);
         setMessages(previousMessages);
       });
 
@@ -54,6 +63,7 @@ const useChat = (friend, setFriends) => {
     return () => {
       if (socketRef.current) {
         console.log("Desconectando socket:", socketRef.current.id);
+        socketRef.current.off("receiveMessage", handleReceiveMessage);
         socketRef.current.disconnect();
         socketRef.current = null;
       }
@@ -117,7 +127,7 @@ const useChat = (friend, setFriends) => {
       timestamp: new Date(),
     };
 
-    console.log("Datos enviaods:", {conversationId: currentConversation, message});
+    //console.log("Datos enviaods:", {conversationId: currentConversation, message});
 
     socketRef.current.emit("sendMessage", { conversationId: currentConversation, message });
 

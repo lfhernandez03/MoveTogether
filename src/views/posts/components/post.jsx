@@ -40,15 +40,19 @@ const Post = (post) => {
     }
 
     try {
-      await axios.post(
-       `https://move-together-back.vercel.api/${postId}/like`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`https://move-together-back.vercel.app/api/${postId}/like`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({}),
+      });
+    
+      if (!response.ok) {
+        throw new Error('Error en la solicitud POST');
+      }
+    
       // Actualizar el estado de los posts para reflejar el "me gusta"
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
@@ -70,7 +74,6 @@ const Post = (post) => {
     const postDate = moment(date);
     const diffMinutes = now.diff(postDate, 'minutes');
     const diffHours = now.diff(postDate, 'hours');
-    const diffDays = now.diff(postDate, 'days');
 
     if (diffMinutes < 60) {
       return `${diffMinutes} minutos`;
