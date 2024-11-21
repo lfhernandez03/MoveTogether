@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const DropdownMenu = ({ options, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -14,8 +15,21 @@ const DropdownMenu = ({ options, onSelect }) => {
     setIsOpen(false); // Cierra el menú después de seleccionar una opción
   };
 
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="relative inline-block text-left">
+    <div ref={menuRef} className="relative inline-block text-left mr-2">
       <button onClick={toggleMenu} className="focus:outline-none flex rounded-full hover:bg-slate-100 p-2 active:bg-slate-200 ">
         <i className="fa-solid fa-ellipsis"></i>
       </button>

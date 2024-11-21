@@ -11,10 +11,6 @@ const Post = (post) => {
   const [activeComponent, setActiveComponent] = useState(null);
   const [visiblePosts, setVisiblePosts] = useState(5); // Mostrar solo los 5 primeros posts
   const [liked, setLiked] = useState(false);
-
-
-
-
   const sortedPosts = [...posts].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   const handleLoadMore = () => {
@@ -125,13 +121,13 @@ const Post = (post) => {
             </div>
           )}
           <div className="pt-2">
-        <Button
-          icon="fa-solid fa-thumbs-up"
-          className={`rounded-full ${liked ? 'bg-blue-500' : 'bg-white'}`}
-          onClick={() => handleLike(post._id)}
-        />
-        <span>{post.likes.length} likes</span>
-      </div>
+            <Button
+              icon="fa-solid fa-thumbs-up"
+              className={`rounded-full ${liked ? 'bg-blue-500' : 'bg-white'}`}
+              onClick={() => handleLike(post._id)}
+            />
+            <span>{post.likes.length} likes</span>
+          </div>
         </div>
       ))}
     {visiblePosts < sortedPosts.length && (
