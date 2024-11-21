@@ -2,26 +2,33 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const UserPost = () => {
-  const [userData, setUserData] = useState({ username: "", fullname: "", avatar: "" });
+  const [userData, setUserData] = useState({
+    username: "",
+    fullname: "",
+    avatar: "",
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const token = localStorage.getItem('authToken'); 
+      const token = localStorage.getItem("authToken");
 
       if (!token) {
-        setError('No se encontró el token');
+        setError("No se encontró el token");
         setLoading(false);
         return;
       }
 
       try {
-        const response = await axios.get('https://move-together-back.vercel.app/api/buscarPerfil', {
-          headers: {
-            "Authorization": `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          "https://move-together-back.vercel.app/api/buscarPerfil",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (response.data) {
           console.log("Datos recibidos:", response.data);
@@ -31,11 +38,11 @@ const UserPost = () => {
             avatar: response.data.avatar,
           });
         } else {
-          setError('No se encontraron datos');
+          setError("No se encontraron datos");
         }
       } catch (error) {
-        console.error('Error al obtener los datos del usuario', error);
-        setError('Error al obtener los datos');
+        console.error("Error al obtener los datos del usuario", error);
+        setError("Error al obtener los datos");
       } finally {
         setLoading(false);
       }
@@ -81,37 +88,47 @@ const UserPostFeed = ({ setPosts, setUserId }) => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const token = localStorage.getItem('authToken'); 
+      const token = localStorage.getItem("authToken");
 
       if (!token) {
-        setError('No se encontró el token');
+        setError("No se encontró el token");
         setLoading(false);
         return;
       }
 
       try {
-        const response = await axios.get('https://move-together-back.vercel.app/api/posts/feed', {
-          headers: {
-            "Authorization": `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          "https://move-together-back.vercel.app/api/posts/feed",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-        if (response.data && Array.isArray(response.data) && response.data.length > 0) {
+        if (
+          response.data &&
+          Array.isArray(response.data) &&
+          response.data.length > 0
+        ) {
           console.log("Datos recibidos:", response.data);
           setPosts(response.data);
 
-          const userResponse = await axios.get('https://move-together-back.vercel.app/api/buscarPerfil', {
-            headers: {
-              "Authorization": `Bearer ${token}`,
-            },
-          });
+          const userResponse = await axios.get(
+            "https://move-together-back.vercel.app/api/buscarPerfil",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
           setUserId(userResponse.data.id);
         } else {
-          setError('No se encontraron datos');
+          setError("No se encontraron datos");
         }
       } catch (error) {
-        console.error('Error al obtener los datos del usuario', error);
-        setError('Error al obtener los datos');
+        console.error("Error al obtener los datos del usuario", error);
+        setError("Error al obtener los datos");
       } finally {
         setLoading(false);
       }
@@ -128,8 +145,7 @@ const UserPostFeed = ({ setPosts, setUserId }) => {
     return <div>Error: {error}</div>;
   }
 
-  return null; 
+  return null;
 };
-
 
 export { UserPost, UserPostFeed };
