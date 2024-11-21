@@ -76,12 +76,12 @@ const InitialInfoPage = () => {
     setUsername(event.target.value);
   };
 
-  const handleSportsChange = (event) => {
-    const selectedOptions = Array.from(
-      event.target.selectedOptions,
-      (option) => option.value
-    );
-    setSports(selectedOptions);
+  const handleSportClick = (sport) => {
+    if (sports.includes(sport)) {
+      setSports(sports.filter((s) => s !== sport));
+    } else {
+      setSports([...sports, sport]);
+    }
   };
 
   // Subir la imagen a Cloudinary
@@ -209,26 +209,26 @@ const InitialInfoPage = () => {
           />
         </div>
 
-        <div className="mb-4">
+        <div className="mb-4 flex flex-col">
           <label
             htmlFor="sports"
             className="block text-lg font-medium text-gray-700"
           >
             ¿Qué deporte practicas?
           </label>
-          <select
-            id="sports"
-            multiple
-            value={sports}
-            onChange={handleSportsChange}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-          >
-            <option value="running">Running</option>
-            <option value="cycling">Cycling</option>
-            <option value="skating">Skating</option>
-            <option value="swimming">Swimming</option>
-            <option value="gym">Gym</option>
-          </select>
+          <div className="flex flex-wrap justify-start mt-1 w-full p-2 max-w-lg gap-x-3 gap-y-2">
+            {['running', 'Ciclismo', 'Patinaje', 'Natación', 'Gimnasio'].map((sport) => (
+              <button
+                key={sport}
+                onClick={() => handleSportClick(sport)}
+                className={`flex justify-center items-center mb-2 rounded-full w-32 h-8 ${
+                  sports.includes(sport) ? 'bg-blue-600 text-white' : 'bg-blue-400 text-black'
+              }`}
+              >
+                {sport.charAt(0).toUpperCase() + sport.slice(1)}
+              </button>
+            ))}
+            </div>
         </div>
 
         <div className="flex justify-center items-center m-4">
