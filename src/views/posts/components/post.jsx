@@ -52,7 +52,14 @@ const Post = (post) => {
       // Actualizar el estado de los posts para reflejar el "me gusta"
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
-          post._id === postId ? { ...post, likes: [...post.likes, userId] } : post
+          post._id === postId
+            ? {
+                ...post,
+                likes: post.likes.includes(userId)
+                  ? post.likes.filter((id) => id !== userId)
+                  : [...post.likes, userId],
+              }
+            : post
         )
       );
     } catch (error) {
@@ -112,22 +119,22 @@ const Post = (post) => {
             <p className="text-justify text-md whitespace-normal break-words">{post.content}</p>
           </div>
           {post.image && (
-            <div className="h-44 border border-blue-200 rounded-t-2xl ">
-              <img
-                src={post.image}
-                alt="imagen"
-                className="w-full h-full object-cover rounded-t-2xl"
-              />
-            </div>
-          )}
-          <div className="pt-2">
-            <Button
-              icon="fa-solid fa-thumbs-up"
-              className={`rounded-full ${liked ? 'bg-blue-500' : 'bg-white'}`}
-              onClick={() => handleLike(post._id)}
-            />
-            <span>{post.likes.length} likes</span>
-          </div>
+                <div className="relative w-full pt-4">
+                  <img
+                    src={post.image}
+                    alt="imagen"
+                    className="w-full h-auto object-contain rounded-t-2xl"
+                />
+              </div>
+              )}
+          <div className="pt-1 flex items-center gap-2">
+  <Button
+    icon="fa-solid fa-thumbs-up"
+    className={`rounded-full ${liked ? 'bg-blue-500' : 'bg-white'}`}
+    onClick={() => handleLike(post._id)}
+  />
+  <span>{post.likes.length}</span>
+</div>
         </div>
       ))}
     {visiblePosts < sortedPosts.length && (
