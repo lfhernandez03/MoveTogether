@@ -36,7 +36,7 @@ const Post = (post) => {
 
     try {
       await axios.post(
-       `https://move-together-back.vercel.api/${postId}/like`,
+       `https://move-together-back.vercel.app/api/${postId}/like`,
         {},
         {
           headers: {
