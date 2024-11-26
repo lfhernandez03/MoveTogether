@@ -48,7 +48,12 @@ const Post = (post) => {
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
           post._id === postId
-            ? { ...post, likes: [...post.likes, userId] }
+            ? {
+                ...post,
+                likes: post.likes.includes(userId)
+                  ? post.likes.filter((id) => id !== userId)
+                  : [...post.likes, userId],
+              }
             : post
         )
       );
@@ -120,22 +125,22 @@ const Post = (post) => {
             </p>
           </div>
           {post.image && (
-            <div className=" overflow-hidden">
+            <div className="h-44 border border-blue-200 rounded-t-2xl ">
               <img
                 src={post.image}
                 alt="imagen"
-                className="w-full h-full object-contain rounded-t-2xl"
+                className="w-full h-full object-cover rounded-t-2xl"
               />
             </div>
           )}
           <div className="pt-2">
-        <Button
-          icon="fa-solid fa-thumbs-up"
-          className={`rounded-full ${liked ? 'bg-blue-500' : 'bg-white'}`}
-          onClick={() => handleLike(post._id)}
-        />
-        <span>{post.likes.length} likes</span>
-      </div>
+            <Button
+              icon="fa-solid fa-thumbs-up"
+              className={`rounded-full ${liked ? 'bg-blue-500' : 'bg-white'}`}
+              onClick={() => handleLike(post._id)}
+            />
+            <span>{post.likes.length} likes</span>
+          </div>
         </div>
       ))}
       {visiblePosts < sortedPosts.length && (
