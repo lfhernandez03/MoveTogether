@@ -92,8 +92,7 @@ const PostProfile = () => {
 
     try {
       const response = await fetch(
-        // `https://move-together-back.vercel.app/api/${postId}/eliminar`,
-        `http://localhost:5000/api/${postId}/eliminar`,
+        `https://move-together-back.vercel.app/api/${postId}/eliminar`,
         {
           method: "DELETE",
           headers: {
