@@ -18,12 +18,9 @@ const SideBarIz = () => {
   };
 
   return (
-    <div className="hidden md:block md:w-45 md:h-full lg:w-80">
+    <div className="hidden md:block md:w-auto lg:w-80 h-full fixed left-0">
       <div className="flex flex-col h-full">
-        <div className=" w-full h-full border-r-2 p-4">
-          <div className="flex md:hidden">
-            <Span classname="" />
-          </div>
+        <div className="w-full h-full border-r-2 p-4">
           <div onClick={handleNavigateHome} className="cursor-pointer">
             <div className="font-bold text-xl flex justify-center">
               <span className="text-green-400">
@@ -31,7 +28,6 @@ const SideBarIz = () => {
               </span>
             </div>
           </div>
-
           <div className="w-full flex flex-col h-full pt-24">
             <ul className="w-full">
               <li className="hover:bg-gray-300 hover:rounded-md border-b-2 flex items-center">
@@ -76,7 +72,7 @@ const SideBarDer = () => {
   ];
 
   return (
-    <div className="hidden md:flex md:flex-col md:h-full md:w-60 lg:flex lg:flex-col lg:w-80 lg:h-full">
+    <div className="hidden md:block md:w-64 lg:w-80 h-full fixed right-0">
       <div className="flex flex-col h-full border-l-2 p-4 overflow-y-auto">
         <div className="flex items-center mb-4">
           <div className="flex text-2xl w-full font-medium select-none">
@@ -99,16 +95,17 @@ const SideBarDer = () => {
 const SideBarDerChat = ({ onSelectFriend, onSelectConversation }) => {
   const { friends } = sideFriends();
 
-  const onlineFriends = friends.filter(friend => friend.isLoggedIn);
-  const offlineFriends = friends.filter(friend => !friend.isLoggedIn);
+  const onlineFriends = friends.filter((friend) => friend.isLoggedIn);
+  const offlineFriends = friends.filter((friend) => !friend.isLoggedIn);
 
   return (
-    <div className="hidden md:flex md:flex-col md:h-full md:w-60 lg:flex lg:flex-col lg:w-80 lg:h-full bg-gray-100 border-l border-gray-300">
+    <div className="hidden md:flex md:flex-col md:w-64 lg:w-80 h-full fixed right-0 overflow-y-auto bg-gray-100 border-l border-gray-300">
       <div className="flex flex-col h-full p-4 overflow-y-auto">
-        
         {/* Título de la sección de conversaciones */}
-        <h2 className="font-semibold text-xl text-gray-700 mb-4">Conversaciones</h2>
-        
+        <h2 className="font-semibold text-xl text-gray-700 mb-4">
+          Conversaciones
+        </h2>
+
         {/* Componente de resumen de conversaciones */}
         <LastMessage onSelectConversation={onSelectConversation} />
 

@@ -15,3 +15,25 @@ html, body, #root {
     filter: brightness(1,1);
     mix-blend-mode: multiply;
 }
+
+#home::-webkit-scrollbar{
+    width: 10px;
+    
+
+}
+
+#home::-webkit-scrollbar-thumb{
+    background-color: #0CCE6B;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#home::-webkit-scrollbar-track{
+    background-color: #f1f1f1;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.body::-webkit-scrollbar{
+    display: none;
+}

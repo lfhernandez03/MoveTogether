@@ -39,7 +39,7 @@ const HomePage = () => {
         <div className="sticky top-0 h-full">
           <SideBarIz />
         </div>
-        <div className="flex-grow flex justify-center items-start mt-6 p-4 overflow-auto">
+        <div id="home" className="flex-grow flex justify-center items-start mt-6 p-4 overflow-auto md:ml-64 lg:ml-80 md:mr-64 lg:mr-80">
           <Routes>
             <Route path="/feed" element={<Feed />} />
             <Route path="/community" element={<Community/>} />

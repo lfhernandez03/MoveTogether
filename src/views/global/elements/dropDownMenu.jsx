@@ -40,7 +40,7 @@ const DropdownMenu = ({ options, onSelect }) => {
               <li key={index}>
                 <button
                   onClick={() => handleSelect(option)}
-                  className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100"
+                  className="block w-full text-right px-4 py-2 text-gray-800 hover:bg-gray-100"
                 >
                   {option.label}
                 </button>

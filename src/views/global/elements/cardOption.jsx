@@ -16,12 +16,12 @@ const CardOption = (props) => {
   return (
     <button
       onClick={handleClick}
-      className={`bg-white mt-3 w-64 rounded-xl shadow-custom border border-green-500 flex justify-between px-4 items-center ${props.className}`}
+      className={`justify-centerbg-white px-4 pt-2 text-end gap-4 flex items-center hover:bg-slate-200 rounded-md ${props.className}`}
     >
-      <div className="bg-blue-400 m-1 rounded-full text-white h-7 w-7 flex justify-center items-center">
-        <i className={`fa-solid ${props.icon} pt-1`}></i>
+      <div className="bg-blue-500 m-1 rounded-full text-white h-7 w-7 flex items-center justify-center">
+        <i className={`fa-solid ${props.icon}`}></i>
       </div>
-      <h1>{props.label}</h1>
+      <h1 className="flex-1">{props.label}</h1>
     </button>
   );
 };
