@@ -5,6 +5,7 @@ import Button from "../../global/elements/button";
 import ComCard from "./comCard";
 import Post from "../../posts/components/post";
 import ComPop from "./comPop";
+import obCommunity from "./obCommunity";
 
 const Community = () => {
   const [selectedTab, setSelectedTab] = useState("feed");
@@ -12,6 +13,10 @@ const Community = () => {
   const [selectedImg, setSelectedImg] = useState(null);
   const [selectedSports, setSelectedSports] = useState([]);
   const [IsSportsOpen, setIsSportsOpen] = useState(false);
+  const [token, setToken] = useState(localStorage.getItem("authToken"));
+
+
+  const { communities, loading, error } = obCommunity(token);
 
   const handleImage = (e) => {
     const file = e.target.files[0];
@@ -109,9 +114,13 @@ const Community = () => {
         )}
         {selectedTab === "descubrir" && (
           <div>
-            <h2 className="text-xl font-semibold">Descubrir</h2>
-            <ComCard />
-          </div>
+          <h2 className="text-xl font-semibold">Descubrir</h2>
+          {loading && <p>Cargando...</p>}
+          {error && <p>Error al cargar comunidades</p>}
+          {communities.map((community) => (
+            <ComCard key={community.id} {...community} />
+          ))}
+        </div>
         )}
       </div>
     </div>
