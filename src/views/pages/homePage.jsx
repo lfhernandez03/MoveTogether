@@ -7,6 +7,7 @@ import ComCard from "../communities/components/comCard";
 import Community from "../communities/components/community";
 import UserProfile from "../sides/components/profile";
 import ChatPage from "./chatPage";
+import RutasView from "../sides/components/rutas";
 
 const HomePage = () => {
   const location = useLocation();
@@ -54,6 +55,7 @@ const HomePage = () => {
                 />
               }
             />
+            <Route path="/rutas" element={<RutasView />} />
           </Routes>
         </div>
         <div className="sticky top-0 h-full">
