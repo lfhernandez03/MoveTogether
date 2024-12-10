@@ -13,7 +13,7 @@ const RutasView = () => {
   const mapRef = useRef(); // Ref for storing the map object
 
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDhL0YO_vXyADRJJ-eOj-u2QXnrWMlV76A", // Reemplaza con tu clave API
+    googleMapsApiKey: import.meta.env.VITE_APP_API_KEY, // Reemplaza con tu clave API
   });
 
   // Función para obtener la ubicación actual con mayor precisión
