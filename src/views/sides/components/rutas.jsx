@@ -98,51 +98,22 @@ const RutasView = () => {
   if (!isLoaded) return <div>Loading...</div>;
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-2">Selecciona tu Ruta en el Mapa</h1>
-      <p className="mb-4">
-        Haz clic en el mapa para seleccionar el <b>origen</b> y el <b>destino</b>.
+    <div className="p-10 lg:p-4">
+      <h1 className="text-3xl font-semibold mb-2">Selecciona tu Ruta en el Mapa</h1>
+      <p className="mb-4 text-xl">
+        Haz clic en el mapa para seleccionar el <b className="text-blue-700">origen</b> y el <b className="text-green-700">destino</b>.
         Luego, selecciona un modo de transporte y haz clic en "Calcular Ruta".
       </p>
 
-      <div className="flex gap-2 mb-4">
-        <button
-          className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-          onClick={clearSelection}
-        >
-          Limpiar Selección
-        </button>
-        <button
-          className={`px-4 py-2 ${
-            origin && destination
-              ? "bg-blue-500 text-white hover:bg-blue-600"
-              : "bg-gray-400 text-gray-200 cursor-not-allowed"
-          } rounded`}
-          onClick={calculateRoute}
-          disabled={!origin || !destination}
-        >
-          Calcular Ruta
-        </button>
-      </div>
-
       <div className="mb-4">
-        <button
-          onClick={getCurrentLocation}
-          className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-        >
-          Usar mi ubicación actual
-        </button>
-      </div>
-
-      <div className="mb-4">
-        <label htmlFor="mode" className="block font-medium mb-1">Selecciona el modo de transporte:</label>
+        <label htmlFor="mode" className="block font-medium mb-1 text-xl">Selecciona el modo de transporte:</label>
         <select
           id="mode"
           value={mode}
           onChange={(e) => setMode(e.target.value)}
-          className="px-4 py-2 border rounded w-full"
+          className="px-4 py-2 border rounded w-64 text-lg"
         >
-          <option value="WALKING">Caminata</option>
+          <option value="WALKING">Running</option>
           <option value="BICYCLING">Ciclismo</option>
           <option value="DRIVING">Patinaje (simulado)</option>
         </select>
@@ -156,13 +127,13 @@ const RutasView = () => {
           onChange={() => setRoundTrip(!roundTrip)}
           className="mr-2"
         />
-        <label htmlFor="roundTrip" className="font-medium">¿Ruta de ida y vuelta?</label>
+        <label htmlFor="roundTrip" className="font-medium text-lg">¿Ruta de ida y vuelta?</label>
       </div>
 
       {distance && duration && (
-        <div className="mb-4 p-4 border rounded bg-gray-100">
-          <p><b>Distancia total:</b> {distance}</p>
-          <p><b>Duración total:</b> {duration}</p>
+        <div className="mb-4 p-4 border rounded bg-gray-100 w-96">
+          <p className="text-xl"><b>Distancia total:</b> {distance}</p>
+          <p className="text-xl"><b>Duración total:</b> {duration}</p>
         </div>
       )}
 
@@ -176,6 +147,32 @@ const RutasView = () => {
         {destination && <Marker position={destination} label="Destino" />}
         {directions && <DirectionsRenderer directions={directions} />}
       </GoogleMap>
+
+      <div className="flex gap-2 m-8 justify-center">
+        <button
+          className="px-4 py-2 bg-red-500 text-white hover:bg-red-600 rounded-full"
+          onClick={clearSelection}
+        >
+          Limpiar Selección
+        </button>
+        <button
+          className={`px-4 py-2 ${
+            origin && destination
+              ? "bg-blue-500 text-white hover:bg-blue-600 rounded-full"
+              : "bg-gray-400 text-gray-200 cursor-not-allowed rounded-full"
+          } rounded`}
+          onClick={calculateRoute}
+          disabled={!origin || !destination}
+        >
+          Calcular Ruta
+        </button>
+        <button
+          onClick={getCurrentLocation}
+          className="px-4 py-2 bg-green-500 rounded-full text-white hover:bg-green-600"
+        >
+          Usar mi ubicación actual
+        </button>
+      </div>
     </div>
   );
 };

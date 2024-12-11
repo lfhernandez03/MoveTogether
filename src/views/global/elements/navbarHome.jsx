@@ -69,7 +69,7 @@ const NavbarHome = () => {
       <div className="hidden md:flex flex-1 justify-center">
         <div className="flex gap-4 items-center">
           <NavigateH navigateTo="/home/feed" bgColor="white" icon="fa-house" />
-          <NavigateH navigateTo="/" bgColor="white" icon="fa-map" />
+          <NavigateH navigateTo="/home/rutas" bgColor="white" icon="fa-map" />
           <NavigateH navigateTo="/" bgColor="white" icon="fa-award" />
           <NavigateH
             navigateTo="/home/profile"
