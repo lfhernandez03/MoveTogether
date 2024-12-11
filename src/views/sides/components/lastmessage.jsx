@@ -10,7 +10,7 @@ const LastMessage = ({ onSelectConversation }) => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/ultimo-Mensaje", {
+        const response = await axios.get("https://move-together-back.vercel.app/api/ultimo-Mensaje", {
           headers: {
             Authorization: `Bearer ${token}` // Asegúrate de incluir el prefijo "Bearer"
           }

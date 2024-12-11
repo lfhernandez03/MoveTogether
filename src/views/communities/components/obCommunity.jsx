@@ -9,7 +9,7 @@ const useFetchCommunities = (token) => {
   useEffect(() => {
     const fetchCommunities = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/comunidades", {
+        const response = await axios.get("https://move-together-back.vercel.app/api/comunidades", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
