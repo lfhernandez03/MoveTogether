@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import EventAlert from "./eventAlert";
+import './eventCalendar.css';
 
 const EventCalendar = ({ events, onDateClick }) => {
   const [date, setDate] = useState(new Date());
-  const [selectedEvents, setSelectedEvents] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleDateChange = (date) => {
     setDate(date);
@@ -16,27 +15,22 @@ const EventCalendar = ({ events, onDateClick }) => {
   const handleDayClick = (date) => {
     const dayEvents = events.filter(event => new Date(event.date).toISOString().split('T')[0] === date.toISOString().split('T')[0]);
     if (dayEvents.length > 0) {
-      setSelectedEvents(dayEvents);
-      setIsModalOpen(true);
+      alert(`Eventos:\n${dayEvents.map(event => `${event.title} - ${event.time} - ${event.destination}`).join('\n')}`);
     }
   };
 
   const tileClassName = ({ date, view }) => {
-    if (view === "month") {
-      const dayEvents = events.filter(
-        (event) =>
-          new Date(event.date).toISOString().split("T")[0] ===
-          date.toISOString().split("T")[0]
-      );
+    if (view === 'month') {
+      const dayEvents = events.filter(event => new Date(event.date).toISOString().split('T')[0] === date.toISOString().split('T')[0]);
       if (dayEvents.length > 0) {
-        return "highlight";
+        return 'highlight';
       }
     }
     return null;
   };
 
   return (
-    <div>
+    <div className="w-full max-w-lg mx-auto">
       <Calendar
         onChange={handleDateChange}
         value={date}
@@ -52,11 +46,6 @@ const EventCalendar = ({ events, onDateClick }) => {
             </div>
           );
         }}
-      />
-      <EventAlert
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        events={selectedEvents}
       />
     </div>
   );

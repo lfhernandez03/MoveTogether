@@ -20,9 +20,8 @@ const Event = ({ event }) => {
     year: 'numeric',
   });
 
-
   return (
-    <div className="mb-6 w-full max-w-lg border border-green-300 p-4 rounded-3xl md:max-w-xl md:h-auto">
+    <div className="mb-6 w-128 max-w-lg border border-green-300 p-4 rounded-3xl md:max-w-xl md:h-auto">
       <div className="w-full">
         <div className="flex items-center justify-between">
           <UserPost />

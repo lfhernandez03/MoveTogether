@@ -19,8 +19,11 @@ const EventsPage = () => {
   };
 
   return (
-    <div>
-      <h1>Eventos</h1>
+    <div className="flex items-center justify-center flex-col">
+      <div className="mb-10 flex flex-col items-center">
+        <h1 className="font-semibold text-2xl">Eventos</h1>
+        <p>Aqui puedes planear tus eventos y guardarlos en tu calendario.</p>
+      </div>
       <EventCalendar events={events} onDateClick={handleDateClick} />
       <Button
         text="Crear Evento"
@@ -34,7 +37,7 @@ const EventsPage = () => {
           onClose={() => setIsModalOpen(false)}
         />
       )}
-      <div>
+      <div className="mt-10">
         <Events events={events} />
       </div>
     </div>
