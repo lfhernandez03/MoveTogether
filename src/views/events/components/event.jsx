@@ -48,7 +48,7 @@ const Event = ({ event }) => {
             </div>
           </div>
           <div className="flex items-center justify-center">
-            <span className="select-none text-md">{event.city}</span>
+            <span className="select-none text-md">{event.destination}</span>
           </div>
           <div className="flex items-center justify-center pt-4">
             <Button 
