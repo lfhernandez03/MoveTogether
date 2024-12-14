@@ -41,10 +41,13 @@ const SideBarIz = () => {
                 />
               </li>
               <li className="hover:bg-gray-300 hover:rounded-md border-b-2 flex items-center">
-                <Button text="Rutas" classname="" href="/home/rutas" />
+                <Button text="Rutas" classname="" navigateTo="/home/rutas" />
               </li>
               <li className="hover:bg-gray-300 hover:rounded-md border-b-2 flex items-center">
-                <Button text="Tu Perfil" classname="" href="/settings" />
+                <Button text="Eventos" classname="" navigateTo="/home/eventos" />
+              </li>
+              <li className="hover:bg-gray-300 hover:rounded-md border-b-2 flex items-center">
+                <Button text="Tu Perfil" classname="" navigateTo="/settings" />
               </li>
             </ul>
           </div>

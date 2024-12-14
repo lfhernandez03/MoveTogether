@@ -8,6 +8,7 @@ import Community from "../communities/components/community";
 import UserProfile from "../sides/components/profile";
 import ChatPage from "./chatPage";
 import RutasView from "../sides/components/rutas";
+import EventsPage from "../pages/EventsPage";
 
 const HomePage = () => {
   const location = useLocation();
@@ -56,6 +57,7 @@ const HomePage = () => {
               }
             />
             <Route path="/rutas" element={<RutasView />} />
+            <Route path="/eventos" element={<EventsPage />} />
           </Routes>
         </div>
         <div className="sticky top-0 h-full">

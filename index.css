@@ -37,3 +37,7 @@ html, body, #root {
 .body::-webkit-scrollbar{
     display: none;
 }
+
+.highlight {
+    @apply bg-yellow-300 text-blue-500;
+}
