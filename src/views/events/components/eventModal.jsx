@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Button from "../../global/elements/button";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const EventModal = ({ isOpen, onClose, onCreateEvent }) => {
   const [title, setTitle] = useState("");
@@ -15,6 +17,36 @@ const EventModal = ({ isOpen, onClose, onCreateEvent }) => {
     setTime("");
     setDestination("");
     onClose();
+  };
+
+  const token = localStorage.getItem("authToken");
+  const handleSendForm = async (event) => {
+    event.preventDefault();
+    const payload = {
+      title: title,
+      date: date,
+      time: time,
+      destination: destination,
+    };
+    try {
+      const response = await axios.post(
+        "https://move-together-back.vercel.app/api/crear/evento",
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.ok) {
+        toast.success("Evento creado con éxito");
+      } else {
+        toast.error(response.data.message || "Error al crear el evento");
+      }
+    } catch (error) {
+      toast.error(error.message || "Error al crear el evento");
+    }
   };
 
   if (!isOpen) return null;
@@ -72,6 +104,7 @@ const EventModal = ({ isOpen, onClose, onCreateEvent }) => {
             <Button
               text="Crear"
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+              onClick={handleSendForm}
             />
           </div>
         </form>
