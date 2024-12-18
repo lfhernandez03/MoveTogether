@@ -70,7 +70,7 @@ const NavbarHome = () => {
         <div className="flex gap-4 items-center">
           <NavigateH navigateTo="/home/feed" bgColor="white" icon="fa-house" />
           <NavigateH navigateTo="/home/rutas" bgColor="white" icon="fa-map" />
-          <NavigateH navigateTo="/" bgColor="white" icon="fa-award" />
+          <NavigateH navigateTo="/home/eventos" bgColor="white" icon="fa-award" />
           <NavigateH
             navigateTo="/home/profile"
             bgColor="white"
@@ -79,8 +79,7 @@ const NavbarHome = () => {
         </div>
       </div>
       <div className="hidden md:flex gap-4 items-center px-4 w-80 justify-end">
-        <NavigateH navigateTo="/" bgColor="white" icon="fa-bell" />
-        <NavigateH navigateTo="/" bgColor="white" icon="fa-inbox" />
+        <NavigateH navigateTo="/home/chat" bgColor="white" icon="fa-inbox" />
         <div
           ref={confiRef}
           className="bg-white text-black rounded-3xl w-8 h-8 flex justify-center items-center relative"
