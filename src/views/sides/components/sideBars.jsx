@@ -51,7 +51,7 @@ const SideBarIz = () => {
                 <Button text="Eventos" classname="" navigateTo="/home/eventos" />
               </li>
               <li className="hover:bg-gray-300 hover:rounded-md border-b-2 flex items-center">
-                <Button text="Tu Perfil" classname="" navigateTo="/settings" />
+              <Button text="Tu Perfil" classname="" navigateTo="/home/profile" />
               </li>
             </ul>
           </div>

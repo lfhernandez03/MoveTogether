@@ -1,12 +1,10 @@
-import { React, useEffect, useState } from "react";
-import UserAvatar from "../../global/elements/userAvatar";
+import { useEffect, useState } from "react";
 
 const sideFriends = () => {
   const [friends, setFriends] = useState([]);
 
   const handleSideFriends = async () => {
-    
-    const token = localStorage.getItem("authToken"); // Asegúrate de obtener el token aquí
+    const token = localStorage.getItem("authToken");
     if (!token) {
       console.log("No se pudo obtener el token de autenticación");
       return;
@@ -18,12 +16,11 @@ const sideFriends = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
       const data = await response.json();
-      console.log(data);
       if (data.amigos) {
         setFriends(data.amigos);
       } else {
@@ -38,7 +35,8 @@ const sideFriends = () => {
     handleSideFriends();
   }, []);
 
-  return { friends, handleSideFriends };
+  // Retornar también setFriends para permitir actualizaciones externas
+  return { friends, setFriends, handleSideFriends };
 };
 
 export default sideFriends;

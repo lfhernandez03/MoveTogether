@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import Button from '../../global/elements/button';
 
 const FriendProfile = () => {
-  const { id } = useParams(); // Obtener el ID del amigo desde la URL
+  const { id } = useParams();
   const [friendData, setFriendData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isFriend, setIsFriend] = useState(false); // Estado para verificar si es amigo
-  const token = localStorage.getItem('authToken'); // Recuperar el token desde localStorage
-  const currentUserId = localStorage.getItem('userId'); // Recuperar el ID del usuario actual desde localStorage
+  const [isFriend, setIsFriend] = useState(false);
+  const token = localStorage.getItem('authToken');
+  const currentUserId = localStorage.getItem('userId');
 
   const fetchFriendData = async () => {
     if (!token) {
@@ -21,18 +20,12 @@ const FriendProfile = () => {
 
     try {
       const response = await axios.get(`https://move-together-back.vercel.app/api/amigos/${id}/perfil`, {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
+        headers: { "Authorization": `Bearer ${token}` },
       });
 
       if (response.data) {
         setFriendData(response.data);
-        // Verificar si el usuario actual ya es amigo
-        console.log("ID del usuario actual:", currentUserId);
-        console.log("IDs de los amigos del perfil:", response.data.friends.map(friend => friend._id));
         const isCurrentUserFriend = response.data.friends.some(friend => friend._id === currentUserId);
-        console.log("La persona es amiga:", isCurrentUserFriend);
         setIsFriend(isCurrentUserFriend);
       } else {
         setError('Datos no encontrados');
@@ -47,37 +40,43 @@ const FriendProfile = () => {
 
   useEffect(() => {
     fetchFriendData();
-  }, [id, token, currentUserId]);
+  }, [id]);
 
   const handleAddFriend = async () => {
+    setIsFriend(true); // Cambiar el botón instantáneamente
     try {
       const response = await axios.post(`https://move-together-back.vercel.app/api/agregar/amigo/${id}`, {}, {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
+        headers: { "Authorization": `Bearer ${token}` },
       });
+
       if (response.data.success) {
-        setIsFriend(true);
-        fetchFriendData(); // Actualizar los datos del amigo
+        setFriendData(prevData => ({
+          ...prevData,
+          friends: [...(prevData.friends || []), { _id: currentUserId }],
+        }));
       }
     } catch (error) {
       console.error('Error al agregar amigo', error);
+      setIsFriend(false); // Revertir si falla
     }
   };
 
   const handleRemoveFriend = async () => {
+    setIsFriend(false); // Cambiar el botón instantáneamente
     try {
       const response = await axios.delete(`https://move-together-back.vercel.app/api/eliminar/amigo/${id}`, {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
+        headers: { "Authorization": `Bearer ${token}` },
       });
+
       if (response.data.success) {
-        setIsFriend(false);
-        fetchFriendData(); // Actualizar los datos del amigo
+        setFriendData(prevData => ({
+          ...prevData,
+          friends: (prevData.friends || []).filter(friend => friend._id !== currentUserId),
+        }));
       }
     } catch (error) {
       console.error('Error al eliminar amigo', error);
+      setIsFriend(true); // Revertir si falla
     }
   };
 
@@ -118,9 +117,19 @@ const FriendProfile = () => {
         </div>
         <div className="flex justify-center">
           {isFriend ? (
-            <Button text="Eliminar Amigo" onClick={handleRemoveFriend} />
+            <button
+              className="bg-red-500 text-white px-4 py-2 rounded"
+              onClick={handleRemoveFriend}
+            >
+              Eliminar Amigo
+            </button>
           ) : (
-            <Button text="Agregar Amigo" onClick={handleAddFriend} />
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded"
+              onClick={handleAddFriend}
+            >
+              Agregar Amigo
+            </button>
           )}
         </div>
       </div>
