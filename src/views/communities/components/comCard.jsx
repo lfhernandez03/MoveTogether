@@ -40,7 +40,7 @@ const ComCard = ({
         </div>
         <div className="block">
           <span className="flex font-semibold text-2xl">{nombre}</span>
-          <span className="flex text-sm">Creado por: {administradorId}</span>
+          {/* <span className="flex text-sm">Creado por: {administradorId}</span> */}
         </div>
         <div className="flex py-4">
           {categorias.map((categoria) => (

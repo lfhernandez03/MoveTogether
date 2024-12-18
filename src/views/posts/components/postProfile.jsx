@@ -174,11 +174,11 @@ const PostProfile = () => {
                 </p>
               </div>
               {post.image && (
-                <div className="relative w-full pt-4">
-                  <img
-                    src={post.image}
-                    alt="imagen"
-                    className="w-full h-auto object-contain rounded-t-2xl"
+                <div className="overflow-hidden">
+                <img
+                  src={post.image}
+                  alt="imagen"
+                  className="w-full h-full object-contain  rounded-t-2xl"
                 />
               </div>
               )}

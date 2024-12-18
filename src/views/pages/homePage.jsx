@@ -9,6 +9,8 @@ import UserProfile from "../sides/components/profile";
 import ChatPage from "./chatPage";
 import RutasView from "../sides/components/rutas";
 import EventsPage from "../pages/EventsPage";
+import FriendProfile from "../sides/components/friendProfile";
+import ListFriends from "../pages/listFriendsPage";
 
 const HomePage = () => {
   const location = useLocation();
@@ -46,6 +48,8 @@ const HomePage = () => {
             <Route path="/feed" element={<Feed />} />
             <Route path="/community" element={<Community/>} />
             <Route path="/profile" element={<UserProfile />} />
+            <Route path="/listsFriend" element={<ListFriends />} />
+            <Route path="/friend-profile/:id" element={<FriendProfile />} />
             <Route
               path="/chat"
               element={
@@ -67,7 +71,7 @@ const HomePage = () => {
               onSelectConversation={handleSelectConversation} 
             />
           ) : (
-            <SideBarDer />
+            <SideBarDer onSelectFriend={setSelectedFriend} />
           )}
         </div>
       </div>
