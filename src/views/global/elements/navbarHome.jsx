@@ -14,6 +14,11 @@ const NavbarHome = () => {
   const menuRef = useRef(null);
   const confiRef = useRef(null);
 
+  const handleLogout = () => {
+    localStorage.removeItem("authToken"); // Elimina el token de autenticación
+    console.log("Cerrar Sesión");
+  };
+
   const handleInputChange = (e) => {
     setSearchValue(e.target.value);
   };
@@ -115,6 +120,7 @@ const NavbarHome = () => {
                 icon="fa-right-from-bracket"
                 label="Cerrar Sesión"
                 className="w-full"
+                onClick={handleLogout}
               />
             </div>
           )}

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom"; // Asegúrate de importar Link
 
-const Search = ({ searchValue }) => {
+const Search = ({ searchValue, setIsSearchOpen }) => {
   const [users, setUsers] = useState([]); // Usuarios
   const [communities, setCommunities] = useState([]); // Comunidades
   const [loading, setLoading] = useState(false);
@@ -41,6 +42,11 @@ const Search = ({ searchValue }) => {
     }
   }, [searchValue]);
 
+  // Función para manejar el clic en una persona o comunidad
+  const handleItemClick = () => {
+    setIsSearchOpen(false); // Cerrar la ventana de búsqueda
+  };
+
   return (
     <div className="p-4 bg-white rounded shadow-lg max-w-md mx-auto">
       {loading && <p>Cargando resultados...</p>}
@@ -56,18 +62,20 @@ const Search = ({ searchValue }) => {
           <ul className="divide-y divide-gray-200 mb-4">
             {users.map((user) => (
               <li key={user._id} className="py-2 flex items-center gap-4">
-                <img
-                  src={user.avatar}
-                  alt={user.fullname}
-                  className="w-12 h-12 rounded-full"
-                />
-                <div>
-                  <p className="font-bold">{user.fullname}</p>
-                  <p className="text-sm text-gray-500">@{user.username}</p>
-                  <p className="text-sm text-gray-400">
-                    {user.ubi.city}, {user.ubi.country}
-                  </p>
-                </div>
+                <Link to={`/home/friend-profile/${user._id}`} className="flex items-center gap-4" onClick={handleItemClick}>
+                  <img
+                    src={user.avatar}
+                    alt={user.fullname}
+                    className="w-12 h-12 rounded-full"
+                  />
+                  <div>
+                    <p className="font-bold">{user.fullname}</p>
+                    <p className="text-sm text-gray-500">@{user.username}</p>
+                    <p className="text-sm text-gray-400">
+                      {user.ubi.city}, {user.ubi.country}
+                    </p>
+                  </div>
+                </Link>
               </li>
             ))}
           </ul>
@@ -81,18 +89,20 @@ const Search = ({ searchValue }) => {
           <ul className="divide-y divide-gray-200">
             {communities.map((community) => (
               <li key={community._id} className="py-2 flex items-center gap-4">
-                <img
-                  src={community.imagenPerfil}
-                  alt={community.nombre}
-                  className="w-12 h-12 rounded-full"
-                />
-                <div>
-                  <p className="font-bold">{community.nombre}</p>
-                  <p className="text-sm text-gray-500">{community.descripcion}</p>
-                  <p className="text-sm text-gray-400">
-                    Categorías: {community.categorias.join(", ")}
-                  </p>
-                </div>
+                <Link to={`/perfil/comunidad/${community._id}`} className="flex items-center gap-4" onClick={handleItemClick}>
+                  <img
+                    src={community.imagenPerfil}
+                    alt={community.nombre}
+                    className="w-12 h-12 rounded-full"
+                  />
+                  <div>
+                    <p className="font-bold">{community.nombre}</p>
+                    <p className="text-sm text-gray-500">{community.descripcion}</p>
+                    <p className="text-sm text-gray-400">
+                      Categorías: {community.categorias.join(", ")}
+                    </p>
+                  </div>
+                </Link>
               </li>
             ))}
           </ul>
