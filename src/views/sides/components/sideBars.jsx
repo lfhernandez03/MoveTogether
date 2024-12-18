@@ -31,7 +31,11 @@ const SideBarIz = () => {
           <div className="w-full flex flex-col h-full pt-24">
             <ul className="w-full">
               <li className="hover:bg-gray-300 hover:rounded-md border-b-2 flex items-center">
-                <Button text="Amigos" classname="" href="/" />
+                <Button 
+                text="Amigos" 
+                classname="" 
+                navigateTo="/home/listsFriend"
+                />
               </li>
               <li className="hover:bg-gray-300 hover:rounded-md border-b-2 flex items-center">
                 <Button
@@ -64,9 +68,14 @@ const SideBarIz = () => {
 
 const SideBarDer = () => {
   const [activeComponent, setActiveComponent] = useState("Contactos");
+  const navigate = useNavigate();
 
   const handleSelect = (option) => {
     setActiveComponent(option.value);
+  };
+
+  const handleFriendClick = (friendId) => {
+    navigate(`/home/friend-profile/${friendId}`);
   };
 
   const options = [
@@ -86,15 +95,14 @@ const SideBarDer = () => {
             <DropdownMenu options={options} onSelect={handleSelect} />
           </div>
         </div>
-        <div className="flex-grow overflow-y-auto">
-          {activeComponent === "Contactos" && <Friends />}
+        <div className="flex-grow overflow-y-auto cursor-pointer">
+          {activeComponent === "Contactos" && <Friends onFriendClick={handleFriendClick} />}
           {activeComponent === "Comunidades" && <Communities />}
         </div>
       </div>
     </div>
   );
 };
-
 const SideBarDerChat = ({ onSelectFriend, onSelectConversation }) => {
   const { friends } = sideFriends();
 

@@ -4,11 +4,11 @@ import Spinner from "../../global/elements/spinner";
 import sideFriends from "../hooks/sideFriends";
 import CommunitySuggest from "./communitySuggest";
 
-const Friends = () => {
+const Friends = ({ onFriendClick }) => {
   const { friends, handleSideFriends } = sideFriends();
 
   return (
-    <div className="h-full ">
+    <div className="h-full">
       <div>
         <div className="pb-6">
           <span className="text-lg select-none">Conectados</span>
@@ -16,17 +16,19 @@ const Friends = () => {
         <div className="flex flex-col gap-4 max-h-60 overflow-y-auto">
           {friends.length > 0 ? (
             friends
-            .filter((friend) => friend.isLoggedIn)
-            .slice(0, 5)
-            .map((friend, index) => (
-              <UserAvatar
-                key={index}
-                avatar={friend.avatar}
-                fullname={friend.fullname}
-                isLoggedIn={friend.isLoggedIn}
-              />
-            ))): (
-            <p className="text-center text-gray-400"> Parece que aun no tienes amix :( </p>
+              .filter((friend) => friend.isLoggedIn)
+              .slice(0, 5)
+              .map((friend, index) => (
+                <div key={index} onClick={() => onFriendClick(friend._id)}>
+                  <UserAvatar
+                    avatar={friend.avatar}
+                    fullname={friend.fullname}
+                    isLoggedIn={friend.isLoggedIn}
+                  />
+                </div>
+              ))
+          ) : (
+            <p className="text-center text-gray-400">Parece que aún no tienes amigos :(</p>
           )}
         </div>
       </div>

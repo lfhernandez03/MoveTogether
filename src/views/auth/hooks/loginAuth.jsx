@@ -63,6 +63,7 @@ const useLogin = () => {
         const data = await response.json();
         if (data.success || response.ok) {
           localStorage.setItem("authToken", data.token);
+          localStorage.setItem("userId", data.userId);
           setError("");
           toast.success("Bienvenido");
           navigate("/home/feed");
