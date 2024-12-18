@@ -1,23 +1,34 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "./button";
 import NavigateH from "./navigate";
 import CardOption from "./cardOption";
 import { Input } from "./inputs";
 import DropdownMenu from "./dropDownMenu";
+import Search from "./search"; // Importa el componente Search
 
 const NavbarHome = () => {
   const [isMenuHidden, setIsMenuHidden] = useState(true);
   const [confiHidden, setConfiHidden] = useState(true);
+  const [searchValue, setSearchValue] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado del modal
   const menuRef = useRef(null);
   const confiRef = useRef(null);
 
-  const toggleConfi = () => {
-    setConfiHidden(!confiHidden);
+  const handleInputChange = (e) => {
+    setSearchValue(e.target.value);
   };
 
-  const handleLogout = () => {
-    // Lógica para cerrar sesión
+  const handleSearchClick = () => {
+    console.log("Search value:", searchValue);
+    setIsModalOpen(true); // Abrir modal
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); // Cerrar modal
+  };
+
+  const toggleConfi = () => {
+    setConfiHidden(!confiHidden);
   };
 
   const handleClickOutside = (event) => {
@@ -60,22 +71,24 @@ const NavbarHome = () => {
             className="w-10 h-10 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-12 lg:h-12 xl:w-12 xl:h-12"
           />
         </span>
-        <Input
-          type="text"
-          placeholder="Buscar"
-          className="w-full h-8 rounded-3xl outline-none border-none hover:bg-slate-200 focus:bg-slate-200 placeholder-gray-500"
-        />
+        <div className="flex items-center w-full">
+          <Input
+            type="text"
+            icon="fa-search"
+            placeholder="Buscar"
+            className="w-full h-8 rounded-3xl outline-none border-none hover:bg-slate-200 focus:bg-slate-200 placeholder-gray-500 min-w-36"
+            value={searchValue}
+            onChange={handleInputChange}
+          />
+          <Button icon="fa-solid fa-search text-blue-500" onClick={handleSearchClick} />
+        </div>
       </div>
       <div className="hidden md:flex flex-1 justify-center">
         <div className="flex gap-4 items-center">
           <NavigateH navigateTo="/home/feed" bgColor="white" icon="fa-house" />
           <NavigateH navigateTo="/home/rutas" bgColor="white" icon="fa-map" />
           <NavigateH navigateTo="/" bgColor="white" icon="fa-award" />
-          <NavigateH
-            navigateTo="/home/profile"
-            bgColor="white"
-            icon="fa-user"
-          />
+          <NavigateH navigateTo="/home/profile" bgColor="white" icon="fa-user" />
         </div>
       </div>
       <div className="hidden md:flex gap-4 items-center px-4 w-80 justify-end">
@@ -98,7 +111,6 @@ const NavbarHome = () => {
                 navigateTo="/"
                 icon="fa-right-from-bracket"
                 label="Cerrar Sesión"
-                onClick={handleLogout}
                 className="w-full"
               />
             </div>
@@ -114,6 +126,24 @@ const NavbarHome = () => {
           className=""
         />
       </div>
+
+      {/* Modal para resultados de búsqueda */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg shadow-lg w-3/4 max-w-md p-4">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-bold">Resultados de búsqueda</h2>
+              <button
+                onClick={closeModal}
+                className="text-red-500 hover:text-red-700"
+              >
+                ×
+              </button>
+            </div>
+            <Search searchValue={searchValue} />
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
